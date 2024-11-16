@@ -1,6 +1,8 @@
 import copy
 def print_grid(grid, demmand_rows, demmand_cols):
 
+    print(grid)
+
     print("Demmand rows: ", demmand_rows)
     print("Demmand cols: ", demmand_cols)
     print("----------------------")
@@ -38,13 +40,20 @@ def parse_input (path):
 #A position is valid if it is not occupied by a ship, and it is not adjacent to a ship.
 # positions without ships are marked with None    
 def verify_position(grid, row, col):
-    if grid[row][col] != None:
+
+    if row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]):
         return False
-    for i in range(-1, 2):
-        for j in range(-1, 2):
-            if row + i >= 0 and row + i < len(grid) and col + j >= 0 and col + j < len(grid[0]):
-                if grid[row + i][col + j] != None:
-                    return False
+    
+    row_start = max(0, row - 1)
+    row_end = min(len(grid), row + 2)
+    col_start = max(0, col - 1)
+    col_end = min(len(grid[0]), col + 2)
+    
+    for i in range(row_start, row_end):
+        for j in range(col_start, col_end):
+            if grid[i][j] is not None:
+                return False
+                
     return True
 
 def calculate_score(grid):
@@ -121,6 +130,7 @@ def main():
     run_example('3_3_2.txt')
     run_example('5_5_6.txt')
     run_example('8_7_10.txt')
+    run_example('10_3_3.txt')
     
 
 if __name__ == '__main__':
