@@ -1,0 +1,19 @@
+\section{Demostración del Algortimo}
+
+Para que la ecuación de recurrencia sea la solución óptima, osea que nos de el \textbf{máximo valor acumulado posible}, basta con verificar que:
+
+\begin{enumerate}
+    \item La solución óptima de un problema grande puede obtenerse combinando soluciones óptimas de subproblemas más pequeños.
+    \item Esta descomposición debe hacerse de tal manera que no se omita ninguna posibilidad relevante para la solución óptima.
+    \item Se debe tomar una decisión sobre cuál subproblema o combinación de subproblemas proporciona el valor máximo.
+\end{enumerate}
+
+
+
+\begin{itemize}
+    \item Nuestro caso base sería: Si no hay monedas, Sophia tendría ganancia cero ya que no habría monedas para seleccionar.
+    \item Si Sophia agarra la primera moneda, podemos calcular su ganancia como el valor de esa moneda, más lo que ella recolectará en turnos posteriores. Esto teniendo en cuenta
+    que Mateo siempre sigue las reglas del juego de manera óptima. En este punto del análisis, se ve como el problema se divide en subproblemas, osea por cada turno de Sophia.
+    \item Si Sophia agarra la última moneda, realizamos la misma lógica anterior, nada más que para la última moneda.
+    \item Luego, elegimos cuál de los dos escenarios logra obtener la máxima ganancia. A medida que vamos maximizando los escenarios locales, finalmente llegaremos al óptimo global de nuestro problema, osea la ganacia máxima posible que puede obtener Sophia.
+    \end{itemize}

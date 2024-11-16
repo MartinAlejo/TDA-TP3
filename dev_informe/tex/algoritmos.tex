@@ -1,0 +1,45 @@
+\section{Ecuación de recurrencia}
+
+A continuación se mostrará la \textbf{ecuación de recurrencia} hallada para este
+problema:
+
+\vskip0.5cm
+
+\begin{center}
+  
+    $T(monedas, inicioFila, finFila) = \left\{ \begin{array}{lcc} K_{1} & si & K_{1} > K_{2} \\ \\ K_{2} & si & K_{1} < K_{2} \\  \end{array} \right.$
+
+\end{center}
+
+Siendo 
+
+\vskip0.25cm
+
+\begin{center}
+  
+    $K_{1} = monedas[inicioFila] + T(monedas, S(monedas, inicioFila + 1, finFila))$
+
+    \vskip0.1cm
+    $K_{2} = monedas[finFila] + T(monedas, S(monedas, inicioFila, finFila - 1))$
+\end{center}
+
+
+donde
+
+
+$S(monedas, inicioFila, finFila) = \left\{ \begin{array}{lcc} (inicioFila+1,finFila) & si & monedas[inicioFila] > monedas[finFila] \\ \\ (inicioFila, finFila - 1) & si &  monedas[inicioFila] < monedas[finFila] \\  \end{array} \right.$
+
+\vskip0.5cm
+
+\textbf{NOTA}: 
+
+$monedas$ = El vector con los valores de las monedas
+
+$inicioFila$ = Es el valor de la primera moneda del vector monedas
+
+$finFila$ = Es el valor de la última moneda del vector monedas
+
+\vskip0.5cm
+
+Nuestra función $T(monedas, inicioFila, finFila)$ nos otorga la ganancia que consiguió Sophia al momento de jugar con una cantidad de $n$ monedas contra Mateo. En esta, podemos observar como nuestras variables $K_{1}$ y $K_{2}$
+realizan llamados recursivos a $T$ teniendo en cuenta como variables $inicioFila$ y $finFila$ la salida de otra función llamada $S(monedas, inicioFila, finFila)$ , que son las dos posibles decisiones que puede tomar mateo al elegir una moneda (recordemos que mateo sigue las reglas del juego estríctamente).

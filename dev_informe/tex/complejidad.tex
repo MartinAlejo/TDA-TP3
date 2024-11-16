@@ -1,0 +1,68 @@
+\section{Algoritmo planteado y complejidad}
+
+El algoritmo que decidimos utilizar para resolver el problema, es el siguiente:
+
+\begin {itemize}
+\item Mientras hayan monedas para elegir:
+    \begin {itemize}
+    \item Vemos todas las monedas disponibles y en función de eso:
+        \begin {itemize}
+        \item En el turno de Sophia, se elige la moneda que maximice la ganancia total, teniendo en cuenta que Mateo siempre va a elegir la moneda de mayor valor en todos los turnos posteriores.
+        \item En el turno de Mateo, se elige la moneda de mayor valor.
+        \end {itemize}
+    \end {itemize}
+\item Devolvemos la ganancia acumulada de Sophia.
+\end {itemize}
+
+Veamos el código:
+\vskip0.25cm
+\begin{lstlisting}[language=Python]
+    def juego_monedas(arr):
+        memory = {}
+        return _juego_monedas(arr, 0, len(arr), memory), memory
+    
+    def _juego_monedas(arr, inicio = 0, fin = 0, memory = {}):
+        if inicio >= fin:
+            return 0
+        
+        key = (inicio, fin)
+        if key in memory:
+            return memory[key]
+    
+        primer_moneda = arr[inicio]
+        ultima_moneda = arr[fin-1]
+        
+        decision_mateo_1 = decision_mateo(arr, inicio + 1, fin)
+        decision_mateo_2 = decision_mateo(arr, inicio, fin-1)
+    
+        ganancia = max(primer_moneda + _juego_monedas(arr,decision_mateo_1[0],decision_mateo_1[1], memory), 
+                       ultima_moneda + _juego_monedas(arr, decision_mateo_2[0], decision_mateo_2[1], memory))
+        
+        memory[key] = ganancia
+    
+        return ganancia
+        
+    def decision_mateo(arr, inicio = 0, fin = 0):
+        if arr[inicio] > arr[fin - 1]:
+            return (inicio + 1, fin)
+        return (inicio, fin - 1)    
+\end{lstlisting}
+\vskip0.25cm
+Lo que estamos haciendo, es de forma recursiva observar todas las decisiones que puede tomar Sophia (sabiendo como se comporta Mateo) y quedarnos con la que maximice la ganancia total. 
+Partimos de un caso base, donde si Sophia no tiene monedas para elegir, la ganancia es 0.
+Luego en cada llamado recursivo, vemos que moneda debemos elegir para maximizar la ganancia de ese sub-problema, y guardamos en memoria el resultado para no tener que volver a calcularlo en caso de que se repita. De esta forma, combinando la solución de los subproblemas, encontramos la solucion del problema original, que resulta en la máxima ganancia que puede obtener Sophia.
+
+
+La complejidad temporal de este algoritmo en principio sería exponencial \textbf{(O($2^n$))}, ya que en cada llamado recursivo se hacen dos llamados recursivos más, y así sucesivamente.
+Sin embargo, al utilizar memoria para guardar los resultados de los subproblemas, evitamos tener que recalcularlos, reduciendo la complejidad a cuadrática \textbf{(O($n^2$))}. Esta complejidad surge de que la cantidad de subproblemas a resolver es $n^2$, ya que cada subproblema esta definido por un intervalo $i$,$j$ donde $i$ y $j$ pueden tomar valores de 0 a $n-1$, siendo $n$ la cantidad de monedas disponibles.
+
+La complejidad espacial del algoritmo es \textbf{O($n^2$)} ya que la memoria utilizada para guardar los resultados de los subproblemas es proporcional a la cantidad de subproblemas a resolver. Respecto al tamaño del stack es despreciable frente a este valor, ya que a lo sumo hay $n$ llamados recursivos en simultaneo.
+
+En resumen, la complejidad temporal y espacial del algoritmo es \textbf{O($n^2$)}.
+\vskip0.5cm
+\textbf{NOTA}: En este análisis no se considera el algoritmo para la reconstrucción de la solución. 
+
+\subsection{Variabilidad}
+
+En relación a la complejidad algorítmica, la variabilidad de los valores de las monedas \textbf{no} afectan a los tiempos del algoritmo planteado, ya que los valores se utilizan para hacer comparaciones entre las monedas, y adiciones sobre el acumulado.
+

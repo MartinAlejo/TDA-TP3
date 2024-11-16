@@ -1,0 +1,8 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Ecuación de recurrencia}{4}{section.1}%
+\contentsline {section}{\numberline {2}Demostración del Algortimo}{4}{section.2}%
+\contentsline {section}{\numberline {3}Algoritmo planteado y complejidad}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Variabilidad}{6}{subsection.3.1}%
+\contentsline {section}{\numberline {4}Ejemplos de ejecución}{6}{section.4}%
+\contentsline {section}{\numberline {5}Medición empírica}{9}{section.5}%
+\contentsline {section}{\numberline {6}Conclusiones}{10}{section.6}%
