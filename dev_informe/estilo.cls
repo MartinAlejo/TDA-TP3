@@ -103,7 +103,7 @@
 \includegraphics[width=7cm]{logo}
 \\[1cm]
 	
-	{ \huge \bfseries Trabajo Práctico 2 \\ Programación Dinámica For The Win}\\[0.3cm]      % Título
+	{ \huge \bfseries Trabajo Práctico 3 \\ Diversión NP-Completa}\\[0.3cm]      % Título
         \vskip1cm
         \textsc{\Large Teoría de Algoritmos}\\           % Materia
 	\textsc{\small (75.29) Curso Buchwald - Genender}\\[0.4cm]    % Subtítulo materia

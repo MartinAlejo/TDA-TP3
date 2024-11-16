@@ -1,11 +1,11 @@
 # Fdb version 4
-["biber main"] 1728864858.61168 "main.bcf" "main.bbl" "main" 1731772802.0471 0
-  "main.bcf" 1731772801.94699 107310 44c5f0f359c2f2f31fe3b9a601a07c9e "pdflatex"
+["biber main"] 1728864858.61168 "main.bcf" "main.bbl" "main" 1731772913.19863 0
+  "main.bcf" 1731772913.10325 107310 44c5f0f359c2f2f31fe3b9a601a07c9e "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1731772800.26103 "/home/riedel/Documents/fiuba/TDA/TDA-TP3/dev_informe/main.tex" "main.pdf" "main" 1731772802.04734 0
+["pdflatex"] 1731772911.70208 "/home/riedel/Documents/fiuba/TDA/TDA-TP3/dev_informe/main.tex" "main.pdf" "main" 1731772913.19883 0
   "/etc/texmf/web2c/texmf.cnf" 1726417066.31095 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/riedel/Documents/fiuba/TDA/TDA-TP3/dev_informe/main.tex" 1728862317.35002 2590 5b8917da4976fced45418c1912110587 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -236,7 +236,7 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1726417095.52417 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1726417236 8214771 a88e489362dda380ad589cfd235c322e ""
-  "estilo.cls" 1728803381.4911 3843 0556f9545bae0fc9b94b769f4b037cb3 ""
+  "estilo.cls" 1731772911.52324 3830 66316cda2fd233bf9a48d53b0e8c8972 ""
   "images/TDA-TP2.png" 1728873612.67183 59494 7aa29953bab617080dd6c2d05c6678b6 ""
   "images/cuadradosMinimos.png" 1728864834.5972 30688 df11c5d2862ca7442a63892ac37a7e32 ""
   "images/image.png" 1728864550.12947 25957 8dc27758747d0587f4a4188c5fc54025 ""
@@ -245,13 +245,13 @@
   "images/screen3.png" 1728873527.9502 160039 61f5dbd2cc35f1b22f28da5ab5f15301 ""
   "images/tests.png" 1728874986.50019 92894 f42b7d8b601cf263d3da89505f28dc5a ""
   "logo.pdf" 1728754493.63209 23517 55dcbdbcb3a7201e9413943da9c8afa3 ""
-  "main.atfi" 1731772801.94799 23 33e109ecf84d2ac55814cb2442ea01dc "pdflatex"
-  "main.aux" 1731772801.94399 1380 88c59c6c282cbbb1c45546181bcfc5ce "pdflatex"
+  "main.atfi" 1731772913.10424 23 33e109ecf84d2ac55814cb2442ea01dc "pdflatex"
+  "main.aux" 1731772913.10024 1380 88c59c6c282cbbb1c45546181bcfc5ce "pdflatex"
   "main.bbl" 1728864859.23026 0 d41d8cd98f00b204e9800998ecf8427e "biber main"
-  "main.out" 1731772801.94599 1080 1d7d081fa6f0cb817def28c1adcb627e "pdflatex"
-  "main.run.xml" 1731772801.94799 2274 3c9efbcb7467da793e6933a55675e6bc "pdflatex"
+  "main.out" 1731772913.10224 1080 1d7d081fa6f0cb817def28c1adcb627e "pdflatex"
+  "main.run.xml" 1731772913.10424 2274 3c9efbcb7467da793e6933a55675e6bc "pdflatex"
   "main.tex" 1728862317.35002 2590 5b8917da4976fced45418c1912110587 ""
-  "main.toc" 1731772801.94799 582 9382b85f5ac55d41d1e3406f6a6645e3 "pdflatex"
+  "main.toc" 1731772913.10424 582 9382b85f5ac55d41d1e3406f6a6645e3 "pdflatex"
   "tex/algoritmos.tex" 1728873527.9602 1579 eb8057832897becd6d66a8cbd5705ffb ""
   "tex/complejidad.tex" 1728873527.9612 3839 b4f2ffda98857a0372b641f895feb4ec ""
   "tex/conclusiones.tex" 1728874983.2312 941 a7773e2038fc341a55fa0aa4125dee2b ""
