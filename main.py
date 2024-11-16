@@ -1,17 +1,18 @@
 import copy
 def print_grid(grid, demmand_rows, demmand_cols):
 
-    print(grid)
-
     print("Demmand rows: ", demmand_rows)
     print("Demmand cols: ", demmand_cols)
     print("----------------------")
     for row in grid:
         for cell in row:
             if cell == None:
-                print('-', end=' ')
+                print(' -', end=' ')
             else:
-                print(cell, end=' ')
+                if cell < 10:
+                    print(' ' + str(cell), end=' ')
+                else:
+                    print(cell, end=' ')
         print("")
     print("----------------------")
     print("")
@@ -39,21 +40,21 @@ def parse_input (path):
     
 #A position is valid if it is not occupied by a ship, and it is not adjacent to a ship.
 # positions without ships are marked with None    
-def verify_position(grid, row, col):
+def verify_position(grid, row, col, rows, cols):
 
     if row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]):
         return False
-    
-    row_start = max(0, row - 1)
-    row_end = min(len(grid), row + 2)
-    col_start = max(0, col - 1)
-    col_end = min(len(grid[0]), col + 2)
-    
-    for i in range(row_start, row_end):
-        for j in range(col_start, col_end):
-            if grid[i][j] is not None:
-                return False
-                
+
+    if rows[row] == 0 or cols[col] == 0:
+        return False
+    # Check if position is already occupied
+    if grid[row][col] is not None:
+        return False
+    for i in range(-1, 2):
+        for j in range(-1, 2):
+            if row + i >= 0 and row + i < len(grid) and col + j >= 0 and col + j < len(grid[0]):
+                if grid[row + i][col + j] != None:
+                    return False
     return True
 
 def calculate_score(grid):
@@ -66,8 +67,8 @@ def calculate_score(grid):
 
 #Return a list of list, showing the placement of the ships
 def ship_placement(rows, cols, ships):
-    grid = [[None] * len(rows) for _ in range(len(cols))]
-    better_solution_grid = [[None] * len(rows) for _ in range(len(cols))]
+    grid = [[None] * len(cols) for _ in range(len(rows))]
+    better_solution_grid = [[None] * len(cols) for _ in range(len(rows))]
     total_amount = sum(rows) + sum(cols)
     ship_placemente_aux(copy.deepcopy(rows), copy.deepcopy(cols), ships, copy.deepcopy(grid), 0, better_solution_grid)
     print("Gained ammount: ", calculate_score(better_solution_grid))
@@ -78,7 +79,7 @@ def ship_placemente_aux(rows, cols, ships, grid, current_ship, better_solution_g
     
     
     if current_ship == len(ships):
-        if calculate_score(grid) > calculate_score(better_solution_grid):
+        if calculate_score(grid) >= calculate_score(better_solution_grid):
             for i in range(len(grid)):
                 for j in range(len(grid[0])):
                     better_solution_grid[i][j] = grid[i][j]
@@ -88,11 +89,11 @@ def ship_placemente_aux(rows, cols, ships, grid, current_ship, better_solution_g
     
     for i in range(len (rows)):
         for j in range(len (cols)):
-            if (rows[i] > 0 and cols[j] > 0) and verify_position(grid, i, j):
+            if verify_position(grid, i, j, rows, cols):
                 if (cols[j] >= ships[current_ship]) and (i + ships[current_ship] <= len(rows)):
                     can_place = True
                     for k in range(ships[current_ship]):
-                        if not verify_position(grid, i + k, j):
+                        if not verify_position(grid, i + k, j, rows, cols):
                             can_place = False
                             break
                     if can_place:
@@ -107,7 +108,7 @@ def ship_placemente_aux(rows, cols, ships, grid, current_ship, better_solution_g
                 if (rows[i] >= ships[current_ship]) and (j + ships[current_ship] <= len(cols)):
                     can_place = True
                     for k in range(ships[current_ship]):
-                        if not verify_position(grid, i, j + k):
+                        if not verify_position(grid, i, j + k, rows, cols):
                             can_place = False
                             break
                     if can_place:
@@ -131,7 +132,12 @@ def main():
     run_example('5_5_6.txt')
     run_example('8_7_10.txt')
     run_example('10_3_3.txt')
-    
+    run_example('10_10_10.txt')
+    run_example('12_12_21.txt')
+    run_example('15_10_15.txt')
+    run_example('20_20_20.txt')
+    run_example('20_25_30.txt')
+    run_example('30_25_25.txt')
 
 if __name__ == '__main__':
     main()
