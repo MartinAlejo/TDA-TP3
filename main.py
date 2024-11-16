@@ -57,10 +57,31 @@ def ship_placemente_aux(rows, cols, ships, grid, current_ship):
     for i in range(len (rows)):
         for j in range(len (cols)):
             if (rows[i] > 0 and cols[j] > 0) and verify_position(grid, i, j):
-                grid[i][j] = current_ship
-                rows[i] -= 1
-                cols[j] -= 1
-                return 2 + ship_placemente_aux(rows, cols, ships, grid, current_ship + 1)
+                if i + ships[current_ship] <= len(rows):
+                    can_place = True
+                    for k in range(ships[current_ship]):
+                        if not verify_position(grid, i + k, j):
+                            can_place = False
+                            break
+                    if can_place:
+                        for k in range(ships[current_ship]):
+                            grid[i + k][j] = current_ship
+                            rows[i + k] -= 1
+                        return 2*(ships[current_ship]) + ship_placemente_aux(rows, cols, ships, grid, current_ship + 1)
+                if j + ships[current_ship] <= len(cols):
+                    can_place = True
+                    for k in range(ships[current_ship]):
+                        if not verify_position(grid, i, j + k):
+                            can_place = False
+                            break
+                    if can_place:
+                        for k in range(ships[current_ship]):
+                            grid[i][j + k] = current_ship
+                            cols[j + k] -= 1
+                        return 2*(ships[current_ship]) + ship_placemente_aux(rows, cols, ships, grid, current_ship + 1)
+                    
+
+
     return ship_placemente_aux(rows, cols, ships, grid, current_ship + 1)
 
 
