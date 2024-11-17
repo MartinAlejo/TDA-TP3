@@ -81,12 +81,13 @@ def ship_placement(rows, cols, ships):
     better_solution_grid = [[None] * len(cols) for _ in range(len(rows))]
     total_amount = sum(rows) + sum(cols)
     available_ships = list(range(len(ships)))
-    ship_placemente_aux(rows.copy(), cols.copy(), ships, copy.deepcopy(grid), None, better_solution_grid, available_ships.copy())
+    ignore_ships = []
+    ship_placemente_aux(rows.copy(), cols.copy(), ships, copy.deepcopy(grid), ignore_ships.copy(), better_solution_grid, available_ships.copy())
     print("Gained ammount: ", calculate_score(better_solution_grid))
     print("Total ammount: ", total_amount)
     print_grid(better_solution_grid, rows, cols)
 
-def ship_placemente_aux(rows, cols, ships, grid, current_ship, better_solution_grid, available_ships):
+def ship_placemente_aux(rows, cols, ships, grid, ignore_ships, better_solution_grid, available_ships):
     score_grid = calculate_score(grid)
     score_best = calculate_score(better_solution_grid)
 
@@ -105,7 +106,7 @@ def ship_placemente_aux(rows, cols, ships, grid, current_ship, better_solution_g
         return
     
     for ship in available_ships:
-        if ship == current_ship:
+        if ship in ignore_ships:
             continue
         ship_size = ships[ship]
         for i in range(len (rows)):
@@ -120,14 +121,14 @@ def ship_placemente_aux(rows, cols, ships, grid, current_ship, better_solution_g
                                 break
                         if can_place:
 
-                            ship_placemente_aux(rows.copy(), cols.copy(), ships, copy.deepcopy(grid), ship, better_solution_grid, available_ships)
+                            ship_placemente_aux(rows.copy(), cols.copy(), ships, copy.deepcopy(grid), ignore_ships + [ship], better_solution_grid, available_ships)
                             for k in range(ship_size):
                                 grid[i + k][j] = ship
                                 rows[i + k] -= 1
                                 cols[j] -= 1
                             new_available_ships = available_ships.copy()
                             new_available_ships.remove(ship)
-                            ship_placemente_aux(rows.copy(), cols.copy(), ships, copy.deepcopy(grid), ship, better_solution_grid, available_ships)
+                            ship_placemente_aux(rows.copy(), cols.copy(), ships, copy.deepcopy(grid), [ship], better_solution_grid, available_ships)
                             return
                     
                     #Horizontal
@@ -138,14 +139,14 @@ def ship_placemente_aux(rows, cols, ships, grid, current_ship, better_solution_g
                                 can_place = False
                                 break
                         if can_place:
-                            ship_placemente_aux(rows.copy(), cols.copy(), ships, copy.deepcopy(grid), ship, better_solution_grid, available_ships)
+                            ship_placemente_aux(rows.copy(), cols.copy(), ships, copy.deepcopy(grid), ignore_ships + [ship], better_solution_grid, available_ships)
                             for k in range(ship_size):
                                 grid[i][j + k] = ship
                                 cols[j + k] -= 1
                                 rows[i] -= 1
                             new_available_ships = available_ships.copy()
                             new_available_ships.remove(ship)
-                            ship_placemente_aux(rows.copy(), cols.copy(), ships, copy.deepcopy(grid), ship, better_solution_grid, new_available_ships)
+                            ship_placemente_aux(rows.copy(), cols.copy(), ships, copy.deepcopy(grid), [ship], better_solution_grid, new_available_ships)
                             return
     # ship_placemente_aux(rows.copy(), cols.copy(), ships, copy.deepcopy(grid), current_ship + 1, better_solution_grid)
 
@@ -157,8 +158,8 @@ def run_example(file):
 
 def main():
     run_example('3_3_2.txt')
-    # run_example('5_5_6.txt')
-    # run_example('8_7_10.txt')
+    run_example('5_5_6.txt')
+    run_example('8_7_10.txt')
     # run_example('10_3_3.txt')
     # run_example('10_10_10.txt')
     # run_example('12_12_21.txt')
