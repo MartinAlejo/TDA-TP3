@@ -69,10 +69,12 @@ def calculate_score(grid):
                 total += 2
     return total
 
+#Returns max score for all available ships
 def calculate_possible_max_ships(ships, available_ships):
     score = 0
     for ship in available_ships:
         score += ships[ship]
+    score *= 2
     return score
 
 #Return a list of list, showing the placement of the ships
@@ -91,55 +93,59 @@ def ship_placemente_aux(rows, cols, ships, grid, ignore_ships, best_solution_gri
     score_grid = calculate_score(grid)
     score_best = calculate_score(best_solution_grid)
 
+    # Poda 1: Espacio insuficiente para los barcos restantes (eliminada)
+
+    # Poda 2: Verificación más conservadora de filas y columnas
+    # for ship in available_ships:
+    #     ship_size = ships[ship]
+    #     valid_positions_found = False
+    #     for i in range(len(rows)):
+    #         for j in range(len(cols)):
+    #             if verify_position(grid, i, j, rows, cols):
+    #                 # Verificar si podemos colocar el barco en esa posición, vertical u horizontalmente
+    #                 if cols[j] >= ship_size and i + ship_size <= len(rows):
+    #                     valid_positions_found = True
+    #                 if rows[i] >= ship_size and j + ship_size <= len(cols):
+    #                     valid_positions_found = True
+    #     if not valid_positions_found:
+    #         # En lugar de podar completamente, simplemente pasamos al siguiente barco si no encontramos posiciones válidas
+    #         continue
+
+    # Poda 3: No mejorar el puntaje
+    # Ajustar esta poda para ser menos restrictiva
+    if score_grid <= score_best:
+        # Verificamos si el puntaje podría mejorar después de colocar más barcos
+        max_possible_score = score_grid + calculate_possible_max_ships(ships, available_ships)
+        if max_possible_score <= score_best:
+            print("Hay poda")
+            return  # No mejorará el puntaje, podar
+
+    # Actualizar la mejor solución si hemos encontrado una mejor
     if score_grid > score_best:
         for i in range(len(grid)):
             for j in range(len(grid[0])):
                 best_solution_grid[i][j] = grid[i][j]
 
+    # Caso base
     if len(available_ships) == 0:
         return
-    
-    sum_rows = sum(rows)
-    sum_cols = sum(cols)
-    #required_space = sum(ships[ship] for ship in available_ships)  # Espacio necesario para los barcos restantes
-
-    if score_best > sum_rows + sum_cols + score_grid:
-        print("Entro a poda 1")
-        return
-
-    if score_best > score_grid + calculate_possible_max_ships(ships, available_ships):
-        print("Entro a poda 2")
-        return
-
-    # Poda 1: Si la demanda total es menor que el tamaño de los barcos restantes, no seguimos
-    # if sum_rows + sum_cols < required_space:
-    #     return # Poda: No hay suficiente espacio para colocar los barcos restantes
-
-    # Poda 2: Si la demanda restante es menor que el tamaño mínimo de los barcos disponibles
-    if sum_rows < min(ships) or sum_cols < min(ships):
-        print("Entro a poda 3")
-        return
-    
-    # # Poda 3: Si el número de barcos restantes es mayor que el número de casillas disponibles
-    # if len(available_ships) > sum_rows + sum_cols:
-    #     return    
 
     for ship in available_ships:
         if ship in ignore_ships:
             continue
         ship_size = ships[ship]
-        for i in range(len (rows)):
-            for j in range(len (cols)):
+        for i in range(len(rows)):
+            for j in range(len(cols)):
                 if verify_position(grid, i, j, rows, cols):
-                    #Vertical
-                    if (cols[j] >= ship_size) and (i + ship_size <= len(rows)):
+                    # Vertical
+                    if cols[j] >= ship_size and i + ship_size <= len(rows):
                         can_place = True
                         for k in range(ship_size):
                             if not verify_position(grid, i + k, j, rows, cols):
                                 can_place = False
                                 break
                         if can_place:
-
+                            # Colocar barco verticalmente
                             ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), ignore_ships + [ship], best_solution_grid, available_ships)
                             for k in range(ship_size):
                                 grid[i + k][j] = ship
@@ -147,17 +153,18 @@ def ship_placemente_aux(rows, cols, ships, grid, ignore_ships, best_solution_gri
                                 cols[j] -= 1
                             new_available_ships = available_ships.copy()
                             new_available_ships.remove(ship)
-                            ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), [ship], best_solution_grid, available_ships)
+                            ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), [ship], best_solution_grid, new_available_ships)
                             return
-                    
-                    #Horizontal
-                    if (rows[i] >= ship_size) and (j + ship_size <= len(cols)):
+
+                    # Horizontal
+                    if rows[i] >= ship_size and j + ship_size <= len(cols):
                         can_place = True
                         for k in range(ship_size):
                             if not verify_position(grid, i, j + k, rows, cols):
                                 can_place = False
                                 break
                         if can_place:
+                            # Colocar barco horizontalmente
                             ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), ignore_ships + [ship], best_solution_grid, available_ships)
                             for k in range(ship_size):
                                 grid[i][j + k] = ship
