@@ -84,7 +84,7 @@ def ship_placement(rows, cols, ships):
     total_amount = sum(rows) + sum(cols)
     available_ships = list(range(len(ships)))
     ignore_ships = []
-    ship_placemente_aux(rows, cols, ships, grid, ignore_ships, best_solution_grid, available_ships)
+    ship_placemente_aux(rows[:], cols[:], ships, grid, ignore_ships, best_solution_grid, available_ships)
     print("Gained ammount: ", calculate_score(best_solution_grid))
     print("Total ammount: ", total_amount)
     print_grid(best_solution_grid, rows, cols)
@@ -117,7 +117,7 @@ def ship_placemente_aux(rows, cols, ships, grid, ignore_ships, best_solution_gri
         # Verificamos si el puntaje podría mejorar después de colocar más barcos
         max_possible_score = score_grid + calculate_possible_max_ships(ships, available_ships)
         if max_possible_score <= score_best:
-            print("Hay poda")
+            #print("Hay poda")
             return  # No mejorará el puntaje, podar
 
     # Actualizar la mejor solución si hemos encontrado una mejor
@@ -187,7 +187,7 @@ def main():
     run_example('10_3_3.txt')
     run_example('10_10_10.txt')
     # run_example('12_12_21.txt')
-    # run_example('15_10_15.txt')
+    run_example('15_10_15.txt')
     # run_example('20_20_20.txt')
     # run_example('20_25_30.txt')
     # run_example('30_25_25.txt')
