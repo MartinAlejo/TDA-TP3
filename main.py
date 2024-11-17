@@ -1,5 +1,6 @@
 import copy
-import itertools
+from more_itertools import distinct_permutations
+
 def print_grid(grid, demmand_rows, demmand_cols):
 
     print("Demmand rows: ", demmand_rows)
@@ -71,13 +72,11 @@ def ship_placement(rows, cols, ships):
     grid = [[None] * len(cols) for _ in range(len(rows))]
     better_solution_grid = [[None] * len(cols) for _ in range(len(rows))]
     total_amount = sum(rows) + sum(cols)
-    already_done_permutations = set()
-    for current_ships in itertools.permutations(ships):
-        if current_ships in already_done_permutations:
-            continue
-        already_done_permutations.add(current_ships)
-        ship_placemente_aux(copy.deepcopy(rows), copy.deepcopy(cols), current_ships, copy.deepcopy(grid), 0, better_solution_grid)
-    ship_placemente_aux(copy.deepcopy(rows), copy.deepcopy(cols), ships, copy.deepcopy(grid), 0, better_solution_grid)
+    combinaciones = 0
+    for current_ships in distinct_permutations(ships):
+        combinaciones += 1
+        #ship_placemente_aux(copy.deepcopy(rows), copy.deepcopy(cols), current_ships, copy.deepcopy(grid), 0, better_solution_grid)
+    print("Combinaciones: ", combinaciones)
     print("Gained ammount: ", calculate_score(better_solution_grid))
     print("Total ammount: ", total_amount)
     print_grid(better_solution_grid, rows, cols)
