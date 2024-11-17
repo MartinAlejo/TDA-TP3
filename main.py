@@ -78,33 +78,52 @@ def calculate_possible_max_ships(ships, available_ships):
 #Return a list of list, showing the placement of the ships
 def ship_placement(rows, cols, ships):
     grid = [[None] * len(cols) for _ in range(len(rows))]
-    better_solution_grid = [[None] * len(cols) for _ in range(len(rows))]
+    best_solution_grid = [[None] * len(cols) for _ in range(len(rows))]
     total_amount = sum(rows) + sum(cols)
     available_ships = list(range(len(ships)))
     ignore_ships = []
-    ship_placemente_aux(rows.copy(), cols.copy(), ships, copy.deepcopy(grid), ignore_ships.copy(), better_solution_grid, available_ships.copy())
-    print("Gained ammount: ", calculate_score(better_solution_grid))
+    ship_placemente_aux(rows, cols, ships, grid, ignore_ships, best_solution_grid, available_ships)
+    print("Gained ammount: ", calculate_score(best_solution_grid))
     print("Total ammount: ", total_amount)
-    print_grid(better_solution_grid, rows, cols)
+    print_grid(best_solution_grid, rows, cols)
 
-def ship_placemente_aux(rows, cols, ships, grid, ignore_ships, better_solution_grid, available_ships):
+def ship_placemente_aux(rows, cols, ships, grid, ignore_ships, best_solution_grid, available_ships):
     score_grid = calculate_score(grid)
-    score_best = calculate_score(better_solution_grid)
+    score_best = calculate_score(best_solution_grid)
 
     if score_grid > score_best:
         for i in range(len(grid)):
             for j in range(len(grid[0])):
-                better_solution_grid[i][j] = grid[i][j]
+                best_solution_grid[i][j] = grid[i][j]
 
     if len(available_ships) == 0:
         return
     
-    if score_best > sum(rows) + sum(cols) + score_grid:
+    sum_rows = sum(rows)
+    sum_cols = sum(cols)
+    #required_space = sum(ships[ship] for ship in available_ships)  # Espacio necesario para los barcos restantes
+
+    if score_best > sum_rows + sum_cols + score_grid:
+        print("Entro a poda 1")
         return
 
     if score_best > score_grid + calculate_possible_max_ships(ships, available_ships):
+        print("Entro a poda 2")
+        return
+
+    # Poda 1: Si la demanda total es menor que el tamaño de los barcos restantes, no seguimos
+    # if sum_rows + sum_cols < required_space:
+    #     return # Poda: No hay suficiente espacio para colocar los barcos restantes
+
+    # Poda 2: Si la demanda restante es menor que el tamaño mínimo de los barcos disponibles
+    if sum_rows < min(ships) or sum_cols < min(ships):
+        print("Entro a poda 3")
         return
     
+    # # Poda 3: Si el número de barcos restantes es mayor que el número de casillas disponibles
+    # if len(available_ships) > sum_rows + sum_cols:
+    #     return    
+
     for ship in available_ships:
         if ship in ignore_ships:
             continue
@@ -121,14 +140,14 @@ def ship_placemente_aux(rows, cols, ships, grid, ignore_ships, better_solution_g
                                 break
                         if can_place:
 
-                            ship_placemente_aux(rows.copy(), cols.copy(), ships, copy.deepcopy(grid), ignore_ships + [ship], better_solution_grid, available_ships)
+                            ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), ignore_ships + [ship], best_solution_grid, available_ships)
                             for k in range(ship_size):
                                 grid[i + k][j] = ship
                                 rows[i + k] -= 1
                                 cols[j] -= 1
                             new_available_ships = available_ships.copy()
                             new_available_ships.remove(ship)
-                            ship_placemente_aux(rows.copy(), cols.copy(), ships, copy.deepcopy(grid), [ship], better_solution_grid, available_ships)
+                            ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), [ship], best_solution_grid, available_ships)
                             return
                     
                     #Horizontal
@@ -139,17 +158,15 @@ def ship_placemente_aux(rows, cols, ships, grid, ignore_ships, better_solution_g
                                 can_place = False
                                 break
                         if can_place:
-                            ship_placemente_aux(rows.copy(), cols.copy(), ships, copy.deepcopy(grid), ignore_ships + [ship], better_solution_grid, available_ships)
+                            ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), ignore_ships + [ship], best_solution_grid, available_ships)
                             for k in range(ship_size):
                                 grid[i][j + k] = ship
                                 cols[j + k] -= 1
                                 rows[i] -= 1
                             new_available_ships = available_ships.copy()
                             new_available_ships.remove(ship)
-                            ship_placemente_aux(rows.copy(), cols.copy(), ships, copy.deepcopy(grid), [ship], better_solution_grid, new_available_ships)
+                            ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), [ship], best_solution_grid, new_available_ships)
                             return
-    # ship_placemente_aux(rows.copy(), cols.copy(), ships, copy.deepcopy(grid), current_ship + 1, better_solution_grid)
-
 
     
 def run_example(file):
@@ -160,8 +177,8 @@ def main():
     run_example('3_3_2.txt')
     run_example('5_5_6.txt')
     run_example('8_7_10.txt')
-    # run_example('10_3_3.txt')
-    # run_example('10_10_10.txt')
+    run_example('10_3_3.txt')
+    run_example('10_10_10.txt')
     # run_example('12_12_21.txt')
     # run_example('15_10_15.txt')
     # run_example('20_20_20.txt')
