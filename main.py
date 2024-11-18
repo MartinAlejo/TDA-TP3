@@ -1,5 +1,7 @@
 import copy
 
+# Memorización: Diccionario para almacenar resultados de subproblemas
+memo = {}
 
 def print_grid(grid, demmand_rows, demmand_cols):
     print("Demmand rows: ", demmand_rows)
@@ -82,8 +84,8 @@ def ship_placement(rows, cols, ships):
     grid = [[None] * len(cols) for _ in range(len(rows))]
     best_solution_grid = [[None] * len(cols) for _ in range(len(rows))]
     total_amount = sum(rows) + sum(cols)
-    available_ships = set(range(len(ships)))
-    ignore_ships = set()
+    available_ships = list(range(len(ships)))
+    ignore_ships = []
     ship_placemente_aux(rows[:], cols[:], ships, grid, ignore_ships, best_solution_grid, available_ships)
     print("Gained ammount: ", calculate_score(best_solution_grid))
     print("Total ammount: ", total_amount)
@@ -91,6 +93,15 @@ def ship_placement(rows, cols, ships):
 
 
 def ship_placemente_aux(rows, cols, ships, grid, ignore_ships, best_solution_grid, available_ships):
+    # Estado clave para la memorización (grid y disponibles como una tupla)
+    grid_tuple = tuple(tuple(row) for row in grid)
+    available_ships_tuple = tuple(available_ships)
+    ignore_ships_tuple = tuple(ignore_ships)
+    
+    # Verificar si ya hemos calculado este estado
+    if (grid_tuple, available_ships_tuple, ignore_ships_tuple) in memo:
+        return memo[(grid_tuple, available_ships_tuple, ignore_ships_tuple)]
+
     score_grid = calculate_score(grid)
     score_best = calculate_score(best_solution_grid)
 
@@ -98,7 +109,8 @@ def ship_placemente_aux(rows, cols, ships, grid, ignore_ships, best_solution_gri
     if score_grid <= score_best:
         max_possible_score = score_grid + calculate_possible_max_ships(ships, available_ships)
         if max_possible_score <= score_best:
-            return  # No mejorará el puntaje, podar
+            memo[(grid_tuple, available_ships_tuple, ignore_ships_tuple)] = None
+            return None  # No mejorará el puntaje, podar
 
     # Actualizar la mejor solución si hemos encontrado una mejor
     if score_grid > score_best:
@@ -108,7 +120,8 @@ def ship_placemente_aux(rows, cols, ships, grid, ignore_ships, best_solution_gri
 
     # Caso base, no quedan barcos disponibles
     if not available_ships:
-        return
+        memo[(grid_tuple, available_ships_tuple, ignore_ships_tuple)] = None
+        return None
 
     for ship in available_ships:
         if ship in ignore_ships:
@@ -126,13 +139,14 @@ def ship_placemente_aux(rows, cols, ships, grid, ignore_ships, best_solution_gri
                                 break
                         if can_place:
                             # Colocar barco verticalmente
-                            ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), ignore_ships | {ship}, best_solution_grid, available_ships)
+                            ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), ignore_ships + [ship], best_solution_grid, available_ships)
                             for k in range(ship_size):
                                 grid[i + k][j] = ship
                                 rows[i + k] -= 1
                                 cols[j] -= 1
-                            new_available_ships = available_ships - {ship}
-                            ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), {ship}, best_solution_grid, new_available_ships)
+                            new_available_ships = available_ships.copy()
+                            new_available_ships.remove(ship)
+                            ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), [ship], best_solution_grid, new_available_ships)
                             return
 
                     # Horizontal
@@ -144,14 +158,19 @@ def ship_placemente_aux(rows, cols, ships, grid, ignore_ships, best_solution_gri
                                 break
                         if can_place:
                             # Colocar barco horizontalmente
-                            ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), ignore_ships | {ship}, best_solution_grid, available_ships)
+                            ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), ignore_ships + [ship], best_solution_grid, available_ships)
                             for k in range(ship_size):
                                 grid[i][j + k] = ship
                                 cols[j + k] -= 1
                                 rows[i] -= 1
-                            new_available_ships = available_ships - {ship}
-                            ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), {ship}, best_solution_grid, new_available_ships)
+                            new_available_ships = available_ships.copy()
+                            new_available_ships.remove(ship)
+                            ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), [ship], best_solution_grid, new_available_ships)
                             return
+
+    # Memorizar el resultado para este estado
+    memo[(grid_tuple, available_ships_tuple, ignore_ships_tuple)] = None
+    return None
 
 
 def run_example(file):
