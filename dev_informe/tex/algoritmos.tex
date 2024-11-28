@@ -1,45 +1,51 @@
-\section{Ecuación de recurrencia}
+\section{Demostración: NP}
 
-A continuación se mostrará la \textbf{ecuación de recurrencia} hallada para este
-problema:
-
-\vskip0.5cm
-
-\begin{center}
-  
-    $T(monedas, inicioFila, finFila) = \left\{ \begin{array}{lcc} K_{1} & si & K_{1} > K_{2} \\ \\ K_{2} & si & K_{1} < K_{2} \\  \end{array} \right.$
-
-\end{center}
-
-Siendo 
+Para que un problema se encuentre en NP, se debe poder encontrar un validador que valide si la solución es correcta, y lo haga en tiempo polinomial.
 
 \vskip0.25cm
 
-\begin{center}
-  
-    $K_{1} = monedas[inicioFila] + T(monedas, S(monedas, inicioFila + 1, finFila))$
+Nuestro problema, está dado por:
 
-    \vskip0.1cm
-    $K_{2} = monedas[finFila] + T(monedas, S(monedas, inicioFila, finFila - 1))$
-\end{center}
+\begin{itemize}
+    \item Una lista con las demandas para cada fila
+    \item Una lista con las demandas para cada columna
+    \item Una lista de k barcos (donde el barco s tiene $b_{s}$ de largo)
+\end{itemize}
 
+La solución, está dada por una Matriz de tamaño n * m, donde para cada casillero ij:
 
-donde
+\begin{itemize}
+    \item Si no hay barco, entonces Matriz[i][j] = None
+    \item Si hay un barco, entonces Matriz[i][j] = s
+\end{itemize}
 
+\textbf{Nota}: Siendo s el índice de dicho barco
+\vskip0.25cm
+El validador entonces verifica lo siguiente:
 
-$S(monedas, inicioFila, finFila) = \left\{ \begin{array}{lcc} (inicioFila+1,finFila) & si & monedas[inicioFila] > monedas[finFila] \\ \\ (inicioFila, finFila - 1) & si &  monedas[inicioFila] < monedas[finFila] \\  \end{array} \right.$
+\begin{itemize}
+    \item Que los barcos no sean adyacentes
+    \item Que las demandas de las filas se cumplan de manera exacta
+    \item Que las demandas de las columnas se cumplan de manera exacta
+    \item Que se coloquen todos los barcos
+\end{itemize}
 
-\vskip0.5cm
+\subsection{Que los barcos no sean adyacentes}
 
-\textbf{NOTA}: 
+    Para verificar que los barcos no sean adyacentes, basta con recorrer cada casillero de la matriz (n * m) y en cada celda visitar las 8 celdas vecinas (un cuadrado).
+    En cada una de las celdas vecinas que visito, veo si hay otro barco distinto, y si lo hay, la solución no es válida.
+    Visitar las 8 celdas vecinas se hace en tiempo constante O(1). Por lo tanto, verificar que no haya barcos adyacentes tiene un costo de O(n * m)
 
-$monedas$ = El vector con los valores de las monedas
+\subsection{Que las demandas de las filas y columnas se cumplan de manera exacta}
 
-$inicioFila$ = Es el valor de la primera moneda del vector monedas
+    Para verificar que las demandas de las filas se cumplan, basta con recorrer cada casillero de la matriz (n * m) y en cada casillero que haya un barco, restar 1 a la demanda de la fila y columna a la que pertenece.
+    Finalmente, se recorre la lista con las demandas para cada fila y nos fijamos que sea todo igual a cero O(n). Lo mismo con la lista de las demandas para cada columna O(m). 
+    Esto nos da un costo total de O(n * m)
 
-$finFila$ = Es el valor de la última moneda del vector monedas
+\subsection{Que se coloquen todos los barcos}
 
-\vskip0.5cm
+    Para verificar que se colocaron todos los barcos, hay que recorrer cada casillero de la matriz (n * m), y en el caso de que en el casillero haya un barco, se agrega a los barcos visitados.
+    Luego se recorren todos los barcos O(k) y nos fijamos que hayan sido todos colocados. Esto nos da un costo total de O(n * m).
 
-Nuestra función $T(monedas, inicioFila, finFila)$ nos otorga la ganancia que consiguió Sophia al momento de jugar con una cantidad de $n$ monedas contra Mateo. En esta, podemos observar como nuestras variables $K_{1}$ y $K_{2}$
-realizan llamados recursivos a $T$ teniendo en cuenta como variables $inicioFila$ y $finFila$ la salida de otra función llamada $S(monedas, inicioFila, finFila)$ , que son las dos posibles decisiones que puede tomar mateo al elegir una moneda (recordemos que mateo sigue las reglas del juego estríctamente).
+\vskip0.25cm
+En conclusion, como pudimos validar una solucion al problema en tiempo polinomial, podemos afirmar que el problema se encuentra en NP.
