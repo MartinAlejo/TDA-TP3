@@ -18,7 +18,7 @@ def validator(solution, row_demands, col_demands, ships):
 
     # First we validate adjacencies
     for i in range(len(row_demands)):
-        for j in range(len (col_demands)):
+        for j in range(len(col_demands)):
             if solution[i][j] != None:
                 ship = solution[i][j]
                 valid = validate_adjacency(solution, i, j, ship)
@@ -27,7 +27,7 @@ def validator(solution, row_demands, col_demands, ships):
 
     # We validate that the demands are being fulfilled
     for i in range(len(row_demands)):
-        for j in range(len (col_demands)):
+        for j in range(len(col_demands)):
             if solution[i][j] != None:
                 row_demands[i] -= 1
                 col_demands[j] -= 1
@@ -40,8 +40,17 @@ def validator(solution, row_demands, col_demands, ships):
         if col_demands[j] != 0:
             return False
         
-    #TODO: Quiza validar que no se esten metiendo todos los barcos y que el tamanio es correcto (no se si es necesario,
-    # pero no se esta haciendo ninguna validacion sobre los barcos)
+    # We validate that all ships have been placed
+    visited_ships = set()
+    for i in range(len(row_demands)):
+        for j in range(len(col_demands)):
+            if solution[i][j] != None:
+                visited_ships.add(solution[i][j])
+    
+    if len(visited_ships) != len(ships):
+        return False
+
+    #TODO: Quiza validar que los barcos se esten colocando de forma vertical u horizontal (no se si es necesario)
     
     # If it reaches here, then the solution is valid
     return True
@@ -101,6 +110,33 @@ def test4():
     print(validator(solution, rows, cols, ships)) # Deberia devolver false porque no se cumplen las demandas de fila
 
 def test5():
+    solution = [
+        [0, None, None],
+        [0, None, 1],
+        [0, None, 1]
+    ]
+
+    rows = [1, 2, 2]
+    cols = [3, 0, 2]
+    ships = [3] # En la solucion hay barcos de mas
+
+    print(validator(solution, rows, cols, ships)) # Deberia devolver false porque se pusieron barcos de mas
+
+def test6():
+    solution = [
+        [0, None, None],
+        [0, None, 1],
+        [0, None, 1]
+    ]
+
+    rows = [1, 2, 2]
+    cols = [3, 0, 2]
+    ships = [3, 2, 1] # En la solucion falta un barco
+
+    print(validator(solution, rows, cols, ships)) # Deberia devolver false porque faltaron poner barcos
+
+
+def test7():
     solution_5_5_6 = [
         [2, None, None, 3, None],
         [2, None, None, 3, None],
@@ -108,7 +144,6 @@ def test5():
         [None, None, None, None, 4],
         [None, None, None, None, 4]
     ]
-
     
     rows, cols, ships = parse_input("inputs/5_5_6.txt")
 
@@ -121,3 +156,5 @@ test2()
 test3()
 test4()
 test5()
+test6()
+test7()
