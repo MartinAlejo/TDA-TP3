@@ -84,18 +84,21 @@ def ship_placement(rows, cols, ships):
     total_amount = sum(rows) + sum(cols)
     available_ships = list(range(len(ships)))
     ignore_ships = []
-    ship_placemente_aux(rows[:], cols[:], ships, grid, ignore_ships, best_solution_grid, available_ships)
+    ship_placement_aux(rows[:], cols[:], ships, grid, ignore_ships, best_solution_grid, available_ships)
     print("Gained ammount: ", calculate_score(best_solution_grid))
     print("Total ammount: ", total_amount)
     print_grid(best_solution_grid, rows, cols)
 
-def ship_placemente_aux(rows, cols, ships, grid, ignore_ships, best_solution_grid, available_ships):
-    score_grid = calculate_score(grid)
-    score_best = calculate_score(best_solution_grid)
+def ship_placement_aux(rows, cols, ships, grid, ignore_ships, best_solution_grid, available_ships):
+    score_grid = calculate_score(grid) # Puntaje actual
+    score_best = calculate_score(best_solution_grid) # Puntaje maximo alcanzado
 
     if score_grid <= score_best:
         # Verificamos si el puntaje podría mejorar después de colocar más barcos
-        max_possible_score = score_grid + calculate_possible_max_ships(ships, available_ships)
+        max_possible_score_ships = calculate_possible_max_ships(ships, available_ships)
+
+        max_possible_score = score_grid + min(max(rows) * 2, max(cols) * 2, max_possible_score_ships)
+        #max_possible_score = score_grid + max_possible_score_ships
         if max_possible_score <= score_best:
             return  # No mejorará el puntaje, podar
 
@@ -125,14 +128,14 @@ def ship_placemente_aux(rows, cols, ships, grid, ignore_ships, best_solution_gri
                                 break
                         if can_place:
                             # Colocar barco verticalmente
-                            ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), ignore_ships + [ship], best_solution_grid, available_ships)
+                            ship_placement_aux(rows[:], cols[:], ships, copy.deepcopy(grid), ignore_ships + [ship], best_solution_grid, available_ships)
                             for k in range(ship_size):
                                 grid[i + k][j] = ship
                                 rows[i + k] -= 1
                                 cols[j] -= 1
                             new_available_ships = available_ships.copy()
                             new_available_ships.remove(ship)
-                            ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), [ship], best_solution_grid, new_available_ships)
+                            ship_placement_aux(rows[:], cols[:], ships, copy.deepcopy(grid), [ship], best_solution_grid, new_available_ships)
                             return
 
                     # Horizontal
@@ -144,14 +147,14 @@ def ship_placemente_aux(rows, cols, ships, grid, ignore_ships, best_solution_gri
                                 break
                         if can_place:
                             # Colocar barco horizontalmente
-                            ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), ignore_ships + [ship], best_solution_grid, available_ships)
+                            ship_placement_aux(rows[:], cols[:], ships, copy.deepcopy(grid), ignore_ships + [ship], best_solution_grid, available_ships)
                             for k in range(ship_size):
                                 grid[i][j + k] = ship
                                 cols[j + k] -= 1
                                 rows[i] -= 1
                             new_available_ships = available_ships.copy()
                             new_available_ships.remove(ship)
-                            ship_placemente_aux(rows[:], cols[:], ships, copy.deepcopy(grid), [ship], best_solution_grid, new_available_ships)
+                            ship_placement_aux(rows[:], cols[:], ships, copy.deepcopy(grid), [ship], best_solution_grid, new_available_ships)
                             return
     
 def run_example(file):
