@@ -44,16 +44,19 @@ def parse_input (path):
 # positions without ships are marked with None
 def verify_position(grid, row, col, rows, cols):
 
+    # Haya demanda en la fila y columna
     if rows[row] == 0 or cols[col] == 0:
         return False
 
+    # Que este adentro de la grilla
     if row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]):
         return False
 
-    # Check if position is already occupied
+    # Que la posicion no este ocupada
     if grid[row][col] != None:
         return False
-    # Check if position is adjacent to a ship
+    
+    # Que no hayan naves adyacentes
     for i in range(-1, 2):
         for j in range(-1, 2):
             if row + i >= 0 and row + i < len(grid) and col + j >= 0 and col + j < len(grid[0]):
@@ -89,73 +92,73 @@ def ship_placement(rows, cols, ships):
     print("Total ammount: ", total_amount)
     print_grid(best_solution_grid, rows, cols)
 
-def ship_placement_aux(rows, cols, ships, grid, ignore_ships, best_solution_grid, available_ships):
-    score_grid = calculate_score(grid) # Puntaje actual
-    score_best = calculate_score(best_solution_grid) # Puntaje maximo alcanzado
+# def ship_placement_aux(rows, cols, ships, grid, ignore_ships, best_solution_grid, available_ships):
+#     score_grid = calculate_score(grid) # Puntaje actual
+#     score_best = calculate_score(best_solution_grid) # Puntaje maximo alcanzado
 
-    if score_grid <= score_best:
-        # Verificamos si el puntaje podría mejorar después de colocar más barcos
-        max_possible_score_ships = calculate_possible_max_ships(ships, available_ships)
+#     if score_grid <= score_best:
+#         # Verificamos si el puntaje podría mejorar después de colocar más barcos
+#         max_possible_score_ships = calculate_possible_max_ships(ships, available_ships)
 
-        max_possible_score = score_grid + min(max(rows) * 2, max(cols) * 2, max_possible_score_ships)
-        #max_possible_score = score_grid + max_possible_score_ships
-        if max_possible_score <= score_best:
-            return  # No mejorará el puntaje, podar
+#         #max_possible_score = score_grid + min(max(rows) * 2, max(cols) * 2, max_possible_score_ships)
+#         max_possible_score = score_grid + max_possible_score_ships
+#         if max_possible_score <= score_best:
+#             return  # No mejorará el puntaje, podar
 
-    # Actualizar la mejor solución si hemos encontrado una mejor
-    if score_grid > score_best:
-        for i in range(len(grid)):
-            for j in range(len(grid[0])):
-                best_solution_grid[i][j] = grid[i][j]
+#     # Actualizar la mejor solución si hemos encontrado una mejor
+#     if score_grid > score_best:
+#         for i in range(len(grid)):
+#             for j in range(len(grid[0])):
+#                 best_solution_grid[i][j] = grid[i][j]
 
-    # Caso base
-    if len(available_ships) == 0:
-        return
+#     # Caso base
+#     if len(available_ships) == 0:
+#         return
 
-    for ship in available_ships:
-        if ship in ignore_ships:
-            continue
-        ship_size = ships[ship]
-        for i in range(len(rows)):
-            for j in range(len(cols)):
-                if verify_position(grid, i, j, rows, cols):
-                    # Vertical
-                    if cols[j] >= ship_size and i + ship_size <= len(rows):
-                        can_place = True
-                        for k in range(ship_size):
-                            if not verify_position(grid, i + k, j, rows, cols):
-                                can_place = False
-                                break
-                        if can_place:
-                            # Colocar barco verticalmente
-                            ship_placement_aux(rows[:], cols[:], ships, copy.deepcopy(grid), ignore_ships + [ship], best_solution_grid, available_ships)
-                            for k in range(ship_size):
-                                grid[i + k][j] = ship
-                                rows[i + k] -= 1
-                                cols[j] -= 1
-                            new_available_ships = available_ships.copy()
-                            new_available_ships.remove(ship)
-                            ship_placement_aux(rows[:], cols[:], ships, copy.deepcopy(grid), [ship], best_solution_grid, new_available_ships)
-                            return
+#     for ship in available_ships:
+#         if ship in ignore_ships:
+#             continue
+#         ship_size = ships[ship]
+#         for i in range(len(rows)):
+#             for j in range(len(cols)):
+#                 if verify_position(grid, i, j, rows, cols):
+#                     # Vertical
+#                     if cols[j] >= ship_size and i + ship_size <= len(rows):
+#                         can_place = True
+#                         for k in range(ship_size):
+#                             if not verify_position(grid, i + k, j, rows, cols):
+#                                 can_place = False
+#                                 break
+#                         if can_place:
+#                             # Colocar barco verticalmente
+#                             ship_placement_aux(rows[:], cols[:], ships, copy.deepcopy(grid), ignore_ships + [ship], best_solution_grid, available_ships)
+#                             for k in range(ship_size):
+#                                 grid[i + k][j] = ship
+#                                 rows[i + k] -= 1
+#                                 cols[j] -= 1
+#                             new_available_ships = available_ships.copy()
+#                             new_available_ships.remove(ship)
+#                             ship_placement_aux(rows[:], cols[:], ships, copy.deepcopy(grid), [ship], best_solution_grid, new_available_ships)
+#                             return
 
-                    # Horizontal
-                    if rows[i] >= ship_size and j + ship_size <= len(cols):
-                        can_place = True
-                        for k in range(ship_size):
-                            if not verify_position(grid, i, j + k, rows, cols):
-                                can_place = False
-                                break
-                        if can_place:
-                            # Colocar barco horizontalmente
-                            ship_placement_aux(rows[:], cols[:], ships, copy.deepcopy(grid), ignore_ships + [ship], best_solution_grid, available_ships)
-                            for k in range(ship_size):
-                                grid[i][j + k] = ship
-                                cols[j + k] -= 1
-                                rows[i] -= 1
-                            new_available_ships = available_ships.copy()
-                            new_available_ships.remove(ship)
-                            ship_placement_aux(rows[:], cols[:], ships, copy.deepcopy(grid), [ship], best_solution_grid, new_available_ships)
-                            return
+#                     # Horizontal
+#                     if rows[i] >= ship_size and j + ship_size <= len(cols):
+#                         can_place = True
+#                         for k in range(ship_size):
+#                             if not verify_position(grid, i, j + k, rows, cols):
+#                                 can_place = False
+#                                 break
+#                         if can_place:
+#                             # Colocar barco horizontalmente
+#                             ship_placement_aux(rows[:], cols[:], ships, copy.deepcopy(grid), ignore_ships + [ship], best_solution_grid, available_ships)
+#                             for k in range(ship_size):
+#                                 grid[i][j + k] = ship
+#                                 cols[j + k] -= 1
+#                                 rows[i] -= 1
+#                             new_available_ships = available_ships.copy()
+#                             new_available_ships.remove(ship)
+#                             ship_placement_aux(rows[:], cols[:], ships, copy.deepcopy(grid), [ship], best_solution_grid, new_available_ships)
+#                             return
     
 def run_example(file):
     rows, cols, ships = parse_input("inputs/" + file)
