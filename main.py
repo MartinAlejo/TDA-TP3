@@ -118,6 +118,12 @@ def unplace_ship_horizontally(grid, row, col, ship_size, rows, cols):
         grid[row][col + k] = None
         rows[row] += 1
         cols[col + k] += 1
+        
+def unplace_ship_vertically(grid, row, col, ship_size, rows, cols):
+    for k in range(ship_size):
+        grid[row + k][col] = None
+        rows[row + k] += 1
+        cols[col] += 1
 
 def ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship):
     score_grid = calculate_score(grid) # Puntaje actual
@@ -130,10 +136,10 @@ def ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_
                 best_solution_grid[i][j] = grid[i][j]
     
     # Caso base
-    if (current_idx_ship == len(ships)): 
+    if (current_idx_ship >= len(ships)): 
         return
 
-    # Poda 1
+    # Poda 1 (no se puede superar el mejor puntaje)
     if score_grid <= score_best:
         # Verificamos si el puntaje podría mejorar después de colocar más barcos
         max_possible_score_ships = calculate_possible_max_ships(ships, current_idx_ship)
@@ -141,57 +147,51 @@ def ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_
         if max_possible_score <= score_best:
             return  # No mejorará el puntaje, podar
         
-    # Poda 2
-    maximo = max(max(rows),max(cols))
-    if ships[current_idx_ship] > maximo:
-        ship_placement_aux(rows[:], cols[:], ships, copy.deepcopy(grid), best_solution_grid, current_idx_ship + 1)
-    else:
-        # Colocacion de barcos
-        ship_size = ships[current_idx_ship]
-        for i in range(len(rows)):
-            for j in range(len(cols)):
-                can_place_horizontal = True
-                can_place_vertical = True
-                demand = 0
-            
-                # Vemos si podemos meter el barco horizontalmente
-                for k in range(ship_size):
-                    if (k == 0):
-                        demand = rows[i]
-                    if (not verify_position(grid, i, j + k, rows, cols, demand)):
-                        can_place_horizontal = False
-                        break
-                    demand -= 1
+    # Poda 2 (no se puede colocar este barco)
+    maximo = max(max(rows), max(cols))
+    while ships[current_idx_ship] > maximo:
+        current_idx_ship += 1 # Posible bug (VER)
 
-                # Vemos si podemos meter el barco verticalmente
-                for k in range(ship_size):
-                    if (k == 0):
-                        demand = cols[j]
-                    if (not verify_position(grid, i + k, j, rows, cols, demand)):
-                        can_place_vertical = False
-                        break
-                    demand -= 1
+    # Intento ubicar el barco actual
+    ship_size = ships[current_idx_ship]
+    for i in range(len(rows)):
+        for j in range(len(cols)):
+            can_place_horizontal = True
+            can_place_vertical = True
+            demand = 0
+        
+            # Vemos si podemos meter el barco horizontalmente
+            for k in range(ship_size):
+                if (k == 0):
+                    demand = rows[i]
+                if (not verify_position(grid, i, j + k, rows, cols, demand)):
+                    can_place_horizontal = False
+                    break
+                demand -= 1
 
-                # Lo intento colocar de forma horizontal
-                if (can_place_horizontal):
-                    rows_aux = rows[:]
-                    cols_aux = cols[:]
-                    grid_aux = copy.deepcopy(grid)
+            # Vemos si podemos meter el barco verticalmente
+            for k in range(ship_size):
+                if (k == 0):
+                    demand = cols[j]
+                if (not verify_position(grid, i + k, j, rows, cols, demand)):
+                    can_place_vertical = False
+                    break
+                demand -= 1
 
-                    place_ship_horizontally(grid_aux, i, j, ship_size, rows_aux, cols_aux, current_idx_ship)
-                    ship_placement_aux(rows_aux, cols_aux, ships, grid_aux, best_solution_grid, current_idx_ship + 1)
+            # Lo intento colocar de forma horizontal
+            if (can_place_horizontal):
+                place_ship_horizontally(grid, i, j, ship_size, rows, cols, current_idx_ship)
+                ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship + 1)
+                #Deshacer
+                unplace_ship_horizontally(grid, i, j, ship_size, rows, cols)
 
-                # Lo intento colocar de forma vertical
-                if (can_place_vertical):
-                    rows_aux = rows[:]
-                    cols_aux = cols[:]
-                    grid_aux = copy.deepcopy(grid)
+            # Lo intento colocar de forma vertical
+            if (can_place_vertical):
+                place_ship_vertically(grid, i, j, ship_size, rows, cols, current_idx_ship)
+                ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship + 1)
+                unplace_ship_vertically(grid, i, j, ship_size, rows, cols)
 
-                    place_ship_vertically(grid_aux, i, j, ship_size, rows_aux, cols_aux, current_idx_ship)
-                    ship_placement_aux(rows_aux, cols_aux, ships, grid_aux, best_solution_grid, current_idx_ship + 1)
-    
-        ship_placement_aux(rows[:], cols[:], ships, copy.deepcopy(grid), best_solution_grid, current_idx_ship + 1)
-
+    ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship + 1)
 
 def run_example(file):
     rows, cols, ships = parse_input("inputs/" + file)
