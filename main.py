@@ -98,9 +98,10 @@ def ship_placement(rows, cols, ships):
     grid = [[None] * len(cols) for _ in range(len(rows))]
     best_solution_grid = [[None] * len(cols) for _ in range(len(rows))]
     total_amount = sum(rows) + sum(cols)
-    available_ships = list(range(len(ships))) # Lista que contiene los indices de los ships que se pueden usar
     ships.sort(reverse=True)
+
     ship_placement_aux(rows[:], cols[:], ships, grid, best_solution_grid,  0)
+
     print("Gained ammount: ", calculate_score(best_solution_grid))
     print("Total ammount: ", total_amount)
     print_grid(best_solution_grid, rows, cols)
@@ -165,7 +166,6 @@ def ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_
         for j in range(len(cols)):
             can_place_horizontal = True
             can_place_vertical = True
-            ya_lo_puse_horizontal = False
             demand = 0
          
             # Vemos si podemos meter el barco horizontalmente
@@ -185,21 +185,24 @@ def ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_
                     can_place_vertical = False
                     break
                 demand -= 1
-            
+
             # Lo intento colocar de forma horizontal
             if (can_place_horizontal):
-                place_ship_horizontally(grid, i, j, ship_size, rows, cols, current_idx_ship)
-                ship_placement_aux(rows[:], cols[:], ships, copy.deepcopy(grid), best_solution_grid, current_idx_ship + 1)
-                # ya_lo_puse_horizontal = True
-                return
+                rows_aux = rows[:]
+                cols_aux = cols[:]
+                grid_aux = copy.deepcopy(grid)
+
+                place_ship_horizontally(grid_aux, i, j, ship_size, rows_aux, cols_aux, current_idx_ship)
+                ship_placement_aux(rows_aux, cols_aux, ships, grid_aux, best_solution_grid, current_idx_ship + 1)
 
             # Lo intento colocar de forma vertical
             if (can_place_vertical):
-                # if ya_lo_puse_horizontal:
-                #     unplace_ship_horizontally(grid, i, j, ship_size, rows, cols)
-                place_ship_vertically(grid, i, j, ship_size, rows, cols, current_idx_ship)
-                ship_placement_aux(rows[:], cols[:], ships, copy.deepcopy(grid), best_solution_grid, current_idx_ship + 1)
-                return
+                rows_aux = rows[:]
+                cols_aux = cols[:]
+                grid_aux = copy.deepcopy(grid)
+
+                place_ship_vertically(grid_aux, i, j, ship_size, rows_aux, cols_aux, current_idx_ship)
+                ship_placement_aux(rows_aux, cols_aux, ships, grid_aux, best_solution_grid, current_idx_ship + 1)
     
 # def ship_placement_aux(rows, cols, ships, grid, ignore_ships, best_solution_grid, available_ships):
 #     score_grid = calculate_score(grid) # Puntaje actual
