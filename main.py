@@ -82,7 +82,7 @@ def calculate_possible_max_ships(ships, current_index):
 
     return score
 
-#Return a list of list, showing the placement of the ships
+# Return a list of list, showing the placement of the ships
 def ship_placement(rows, cols, ships):
     grid = [[None] * len(cols) for _ in range(len(rows))]
     best_solution_grid = [[None] * len(cols) for _ in range(len(rows))]
@@ -129,11 +129,32 @@ def available_places(grid):
     
     return empty_places
 
+# Nueva función para verificar espacios libres
+# def has_sufficient_space(grid, ship_size, rows, cols):
+#     for i in range(len(rows)):
+#         free_count_row = 0
+#         free_count_col = 0
+#         for j in range(len(cols)):
+#             # Verifica fila
+#             if grid[i][j] is None:
+#                 free_count_row += 1
+#             else:
+#                 free_count_row = 0
+#             if free_count_row >= ship_size:
+#                 return True
+
+#             # Verifica columna
+#             if grid[j][i] is None:
+#                 free_count_col += 1
+#             else:
+#                 free_count_col = 0
+#             if free_count_col >= ship_size:
+#                 return True
+#     return False
+
 def ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship):
     score_grid = calculate_score(grid) # Puntaje actual
     score_best = calculate_score(best_solution_grid) # Puntaje maximo alcanzado
-    
-    # print("Score best es: ", score_best)
 
     # Mejora la solucion, reemplazamos
     if score_grid > score_best:
@@ -151,30 +172,28 @@ def ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_
     if score_grid <= score_best:
         # Verificamos si el puntaje podría mejorar después de colocar más barcos
         max_possible_score_ships = calculate_possible_max_ships(ships, current_idx_ship)
-
-        max_possible_score = score_grid + min(max_possible_score_ships, sum(rows) + sum(cols), available_spaces * 2) 
-        # max_possible_score = score_grid + max_possible_score_ships
+        max_possible_score = score_grid + min(max_possible_score_ships, available_spaces)
+        # max_possible_score = score_grid + min(max_possible_score_ships, sum(rows) + sum(cols), available_spaces) 
         if max_possible_score <= score_best:
             # print("Entro a la poda buena")
             return  # No mejorará el puntaje, podar
         
     # Poda 2 (no se puede colocar este barco)
     maximo = max(max(rows), max(cols))
-    while ships[current_idx_ship] > maximo:
+    while (ships[current_idx_ship] > maximo) and (current_idx_ship < len(ships)):
         # print("Entro a la poda")
         current_idx_ship += 1 # Posible bug (VER)
-        
-    # No sirve    
-    # if available_spaces < sum(ships[current_idx_ship:]):
-    #     print("Sirvio de algo")
-    #     return  # No se pueden colocar más barcos
+    
+    #print("score_best: ", score_best)
 
     # Intento ubicar el barco actual
     ship_size = ships[current_idx_ship]
     for i in range(len(rows)):
-        # if rows[i] == 0: continue
+        if rows[i] == 0: 
+            continue
         for j in range(len(cols)):
-            # if cols[j] == 0: continue
+            if cols[j] == 0: 
+                continue
             can_place_horizontal = True
             can_place_vertical = True
             demand = 0
