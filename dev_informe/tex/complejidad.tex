@@ -12,6 +12,6 @@ Estamos probando todas las combinaciones posibles, al iterar por todos los barco
 Estamos realizando dos podas:
 
 \begin{itemize}
-    \item Si el barco por el que estoy iterando no cabe por la capacidad máxima de la fila o la columna (que tenga mayor valor entre ambos máximos), entonces el barco no se puede meter en esa rama, por lo que se pasa al siguiente barco. 
-    \item Sumamos los barcos que nos quedan por colocar, y eso es como mucho lo máximo que puede incrementar nuestra solución. Si no supera la mejor solución obtenida, se poda la rama.
+    \item Si el barco por el que estoy iterando no cabe por la capacidad máxima de la fila o la columna (que tenga mayor valor entre ambos máximos), entonces el barco no se puede meter en la solución actual, por lo que se pasa al siguiente barco. 
+    \item Sumamos los barcos que nos quedan por colocar (multiplicado por 2), y eso es como mucho lo máximo que puede mejorar nuestra solución. Si no supera la mejor solución ya obtenida, no tiene sentido seguir, por lo que se poda la rama.
 \end{itemize}
