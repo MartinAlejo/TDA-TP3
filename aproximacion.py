@@ -170,18 +170,59 @@ def run_example(file):
     score = calculate_score(aproximation(rows, cols, ships))
     print("demanda total: ", max_possible_score)
     print("Demanda cumplida: ", score)
-    print("Demanda sin cumplir: ", max_possible_score - score)
+    #print("Demanda sin cumplir: ", max_possible_score - score)
+    return score
 
 def main():
-    #run_example('3_3_2.txt')
-    #run_example('5_5_6.txt')
-    #run_example('8_7_10.txt')
-    #run_example('10_3_3.txt')
-    # run_example('10_10_10.txt')
-    # run_example('12_12_21.txt')
-    # run_example('15_10_15.txt')
-    run_example('20_20_20.txt')
-    # run_example('20_25_30.txt')
-    # run_example('30_25_25.txt')
+    score1 = run_example('3_3_2.txt')
+    scoreOptimo1 = 4
+    print("demanda optima: 4")
+    print("cota1: ", score1/scoreOptimo1)
+
+    print("----------------------------")
+    score2 = run_example('5_5_6.txt')
+    scoreOptimo2 = 12
+    print("demanda optima: 12")
+    print("cota2: ", score2/scoreOptimo2)
+    print("----------------------------")
+    score3 = run_example('8_7_10.txt')
+    scoreOptimo3 = 26
+    print("demanda optima: 26")
+    print("cota3: ", score3/scoreOptimo3)
+    print("----------------------------")
+    score4 = run_example('10_3_3.txt')
+    scoreOptimo4 = 6
+    print("demanda optima: 6")
+    print("cota4: ", score4/scoreOptimo4)
+    print("----------------------------")
+    score5 = run_example('10_10_10.txt')
+    scoreOptimo5 = 40
+    print("demanda optima: 40")
+    print("cota5: ", score5/scoreOptimo5)
+    print("----------------------------")
+    score6 = run_example('12_12_21.txt')
+    scoreOptimo6 = 46
+    print("demanda optima: 46")
+    print("cota6: ", score6/scoreOptimo6)
+    print("----------------------------")
+    score7 = run_example('15_10_15.txt')
+    scoreOptimo7 = 40
+    print("demanda optima: 40")
+    print("cota7: ", score7/scoreOptimo7)
+    print("----------------------------")
+    score8 = run_example('20_20_20.txt')
+    scoreOptimo8 = 104
+    print("demanda optima: 104")
+    print("cota8: ", score8/scoreOptimo8)
+    print("----------------------------")
+    score9 = run_example('20_25_30.txt')
+    scoreOptimo9 = 172
+    print("demanda optima: 172")
+    print("cota9: ", score9/scoreOptimo9)
+    print("----------------------------")
+    score10 = run_example('30_25_25.txt')
+    scoreOptimo10 = 202
+    print("demanda optima: 202")
+    print("cota10: ", score10/scoreOptimo10)
 
 main()
