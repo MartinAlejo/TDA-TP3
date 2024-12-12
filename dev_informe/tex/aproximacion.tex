@@ -3,7 +3,7 @@
 
 \subsection{Descripción del algoritmo}
 
-A continuacion se presenta un algoritmo de aproximación para el problema de la batalla naval.
+A continuación se presenta un algoritmo de aproximación para el problema de la batalla naval.
 
 \lstinputlisting[language=python]{code/aproximacion.py}
 
@@ -11,84 +11,28 @@ A continuacion se presenta un algoritmo de aproximación para el problema de la 
 
 El algoritmo de aproximación para el problema de la batalla naval tiene una complejidad de $O((n + m) \cdot b \cdot k)$, donde $n$ es el número de filas, $m$ es el número de columnas del tablero, $b$ es la longitud del barco y $k$ es la cantidad de barcos que hay. Ya que el algoritmo recorre los barcos, compara cual tiene más demanda, si la columna o la fila, que luego define si poner el barco horizontal o vertical. 
 
-La aproximación que nos da el algoritmo es el siguiente:
+\begin{table}[h!]
+    \centering
+    \caption{Resultados de demandas}
+    \label{tab:resultados}
+    \begin{tabular}{|c|c|c|c|}
+      \hline
+      Demanda Total & Demanda Aproximada - A(I) & Demanda Óptima - Z(I) & Relación \( r(A) \) \\ \hline
+      11            & 2                         & 4                     & 0.5000             \\ \hline
+      18            & 12                        & 12                    & 1.0000             \\ \hline
+      53            & 18                        & 26                    & 0.6923             \\ \hline
+      40            & 20                        & 40                    & 0.5000             \\ \hline
+      58            & 18                        & 46                    & 0.3913             \\ \hline
+      67            & 18                        & 40                    & 0.4500             \\ \hline
+      120           & 38                        & 104                   & 0.3653             \\ \hline
+      247           & 62                        & 172                   & 0.3604             \\ \hline
+      360           & 88                        & 202                   & 0.4356             \\ \hline
+    \end{tabular}
+\end{table}
 
-demanda total:  11
+Como podemos ver, no es el mejor algoritmo para acercarse a la solución óptima, que sería maximizar la demanda cumplida. Sin embargo, en algunos casos llega como por ejemplo en el segundo ejemplo ilustrado anteriormente, o se acerca bastante como el tercer ejemplo. 
 
-Demanda cumplida:  2
+La cota a la que llegamos empiricamente, para ver la relación entre el resultado óptimo, es $r(A) = 0.3604$.
 
-demanda optima: 4
+Por lo tanto, en el peor de los casos, obtuvimos una aproximación de $3/10$ a la solución óptima.
 
-----------------------------
-
-demanda total:  18
-
-Demanda cumplida:  12
-
-demanda optima: 12
-
-----------------------------
-
-demanda total:  53
-
-Demanda cumplida:  18
-
-demanda optima: 26
-
-----------------------------
-
-demanda total:  14
-
-Demanda cumplida:  0
-
-demanda optima: 6
-
-----------------------------
-
-demanda total:  40
-
-Demanda cumplida:  20
-
-demanda optima: 40
-
-----------------------------
-
-demanda total:  58
-
-Demanda cumplida:  18
-
-demanda optima: 46
-
-----------------------------
-
-demanda total:  67
-
-Demanda cumplida:  18
-
-demanda optima: 40
-
-----------------------------
-
-demanda total:  120
-
-Demanda cumplida:  38
-
-demanda optima: 104
-
-----------------------------
-
-demanda total:  247
-
-Demanda cumplida:  62
-
-demanda optima: 172
-
-----------------------------
-
-demanda total:  360
-
-Demanda cumplida:  88
-
-demanda optima: 202
-
-Como podemos ver, no es el mejor algoritmo para acercarse a la solución óptima, que sería maximizar la demanda cumplida. Sin embargo, en algunos casos llega como por ejemplo en el segundo ejemplo ilustrado anteriormente

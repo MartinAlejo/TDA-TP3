@@ -1,55 +1,21 @@
-def print_grid(grid, demmand_rows, demmand_cols):
-    print("Demmand rows: ", demmand_rows)
-    print("Demmand cols: ", demmand_cols)
-    print("----------------------")
-    for row in grid:
-        for cell in row:
-            if cell == None:
-                print(' -', end=' ')
-            else:
-                if cell < 10:
-                    print(' ' + str(cell), end=' ')
-                else:
-                    print(cell, end=' ')
-        print("")
-    print("----------------------")
-    print("")
-    print("")
-    
-def parse_input (path):
-    with open(path, 'r') as file:
-        lines = file.readlines()
-        lines = [line for line in lines if not line.startswith('#')]
-        lines = [line.rstrip() for line in lines]
-        rows, cols , ships = [],[],[]
-        aux_counter = 0
-        for x in lines:
-            if x == '':
-                aux_counter += 1
-                continue
-            if aux_counter == 0:
-                rows.append(int(x))
-            if aux_counter == 1:
-                cols.append(int(x))
-            if aux_counter == 2:
-                ships.append(int(x))
-        return rows, cols, ships
-    
-
 def verify_position(grid, row, col, rows, cols, demand):
 
+   
     if row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]):
         return False
 
+   
     if rows[row] == 0 or cols[col] == 0:
         return False
 
     if demand == 0: 
         return
 
+  
     if grid[row][col] != None:
         return False
     
+
     for i in range(-1, 2):
         for j in range(-1, 2):
             if row + i >= 0 and row + i < len(grid) and col + j >= 0 and col + j < len(grid[0]):
@@ -125,28 +91,33 @@ def available_places(grid):
 
 
 def ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship):
-    score_grid = calculate_score(grid) 
-    score_best = calculate_score(best_solution_grid)
+    score_grid = calculate_score(grid) # Puntaje actual
+    score_best = calculate_score(best_solution_grid) # Puntaje maximo alcanzado
 
+   
     if score_grid > score_best:
         for i in range(len(rows)):
             for j in range(len(cols)):
                 best_solution_grid[i][j] = grid[i][j]
     
+   
     if (current_idx_ship >= len(ships)): 
         return
 
     available_spaces = available_places(grid)
 
-    if score_grid <= score_best:    
+    
+    if score_grid <= score_best:
+      
         max_possible_score_ships = calculate_possible_max_ships(ships, current_idx_ship)
         max_possible_score = score_grid + min(max_possible_score_ships, available_spaces)
+         
         if max_possible_score <= score_best:
-            return  
-
+            return 
+        
     maximo = max(max(rows), max(cols))
     while (ships[current_idx_ship] > maximo) and (current_idx_ship < len(ships)):
-        current_idx_ship += 1
+        current_idx_ship += 1 
     
     ship_size = ships[current_idx_ship]
     for i in range(len(rows)):
@@ -186,22 +157,3 @@ def ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_
                 unplace_ship_vertically(grid, i, j, ship_size, rows, cols)
 
     ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship + 1)
-
-def run_example(file):
-    rows, cols, ships = parse_input("inputs/" + file)
-    ship_placement(rows, cols, ships)
-
-def main():
-    run_example('3_3_2.txt')
-    run_example('5_5_6.txt')
-    run_example('8_7_10.txt')
-    run_example('10_3_3.txt')
-    run_example('10_10_10.txt')
-    run_example('12_12_21.txt') 
-    run_example('15_10_15.txt')
-    run_example('20_20_20.txt')
-    run_example('20_25_30.txt') 
-    run_example('30_25_25.txt') # Tarda mucho
-
-if __name__ == '__main__':
-    main()

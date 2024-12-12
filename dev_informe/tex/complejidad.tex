@@ -1,1 +1,17 @@
 \section{Algoritmo de Backtracking}
+\label{sec:backtracking}
+
+\subsection{Codigo}
+
+\lstinputlisting[language=python]{code/backtracking.py}
+
+\subsection{Análisis}
+
+Estamos probando todas las combinaciones posibles, al iterar por todos los barcos y por cada uno, iterar por cada casillero de la matriz. En cada posición del casillero, estamos intentando meter el barco, tanto vertical como horizontalmente, y también consideramos el caso de que no se ponga dicho barco. Esto nos termina dando una complejidad exponencial en cantidad de barcos, ya que como mencionamos al principio, estamos probando todas las combinaciones posibles, por lo tanto: O(2$^n$).
+
+Estamos realizando dos podas:
+
+\begin{itemize}
+    \item Si el barco por el que estoy iterando no cabe por la capacidad máxima de la fila o la columna (que tenga mayor valor entre ambos máximos), entonces el barco no se puede meter en esa rama, por lo que se pasa al siguiente barco. 
+    \item Sumamos los barcos que nos quedan por colocar, y eso es como mucho lo máximo que puede incrementar nuestra solución. Si no supera la mejor solución obtenida, se poda la rama.
+\end{itemize}

@@ -1,6 +1,6 @@
 \section{Demostración: NP}
 
-Para que un problema se encuentre en NP, se debe poder encontrar un validador que valide si la solución es correcta, y lo haga en tiempo polinomial.
+Para que un problema se encuentre en $NP$, se debe poder encontrar un validador que valide si la solución es correcta, y lo haga en tiempo polinomial.
 
 \vskip0.25cm
 
@@ -12,14 +12,14 @@ Nuestro problema, está dado por:
     \item Una lista de k barcos (donde el barco s tiene $b_{s}$ de largo)
 \end{itemize}
 
-La solución, está dada por una Matriz de tamaño n * m, donde para cada casillero ij:
+La solución, está dada por una Matriz de tamaño $n * m$, donde para cada casillero $ij$:
 
 \begin{itemize}
-    \item Si no hay barco, entonces Matriz[i][j] = None
-    \item Si hay un barco, entonces Matriz[i][j] = s
+    \item Si no hay barco, entonces $Matriz[i][j] = None$
+    \item Si hay un barco, entonces $Matriz[i][j] = s$
 \end{itemize}
 
-\textbf{Nota}: Siendo s el índice de dicho barco
+\textbf{Nota}: Siendo $s$ el índice de dicho barco
 \vskip0.25cm
 El validador entonces verifica lo siguiente:
 
@@ -32,20 +32,24 @@ El validador entonces verifica lo siguiente:
 
 \subsection{Que los barcos no sean adyacentes}
 
-    Para verificar que los barcos no sean adyacentes, basta con recorrer cada casillero de la matriz (n * m) y en cada celda visitar las 8 celdas vecinas (un cuadrado).
+    Para verificar que los barcos no sean adyacentes, basta con recorrer cada casillero de la matriz $n * m$ y en cada celda visitar las 8 celdas vecinas (un cuadrado).
     En cada una de las celdas vecinas que visito, veo si hay otro barco distinto, y si lo hay, la solución no es válida.
-    Visitar las 8 celdas vecinas se hace en tiempo constante O(1). Por lo tanto, verificar que no haya barcos adyacentes tiene un costo de O(n * m)
+    Visitar las 8 celdas vecinas se hace en tiempo constante $O(1)$. Por lo tanto, verificar que no haya barcos adyacentes tiene un costo de $O(n * m)$
 
 \subsection{Que las demandas de las filas y columnas se cumplan de manera exacta}
 
-    Para verificar que las demandas de las filas se cumplan, basta con recorrer cada casillero de la matriz (n * m) y en cada casillero que haya un barco, restar 1 a la demanda de la fila y columna a la que pertenece.
-    Finalmente, se recorre la lista con las demandas para cada fila y nos fijamos que sea todo igual a cero O(n). Lo mismo con la lista de las demandas para cada columna O(m). 
-    Esto nos da un costo total de O(n * m)
+    Para verificar que las demandas de las filas se cumplan, basta con recorrer cada casillero de la matriz $n * m$ y en cada casillero que haya un barco, restar 1 a la demanda de la fila y columna a la que pertenece.
+    Finalmente, se recorre la lista con las demandas para cada fila y nos fijamos que sea todo igual a cero $O(n)$. Lo mismo con la lista de las demandas para cada columna $O(m)$. 
+    Esto nos da un costo total de $O(n * m)$
 
 \subsection{Que se coloquen todos los barcos}
 
-    Para verificar que se colocaron todos los barcos, hay que recorrer cada casillero de la matriz (n * m), y en el caso de que en el casillero haya un barco, se agrega a los barcos visitados.
-    Luego se recorren todos los barcos O(k) y nos fijamos que hayan sido todos colocados. Esto nos da un costo total de O(n * m).
+    Para verificar que se colocaron todos los barcos, hay que recorrer cada casillero de la matriz $n * m$, y en el caso de que en el casillero haya un barco, se agrega a los barcos visitados.
+    Luego se recorren todos los barcos $O(k)$ y nos fijamos que hayan sido todos colocados. Esto nos da un costo total de $O(n * m)$.
 
+\subsection{Codigo}
+\lstinputlisting[language=python]{code/np_validator.py}
+
+\subsection{Conclusion}
 \vskip0.25cm
-En conclusion, como pudimos validar una solucion al problema en tiempo polinomial, podemos afirmar que el problema se encuentra en NP.
+En conclusión, como pudimos validar una solución al problema en tiempo polinomial, podemos afirmar que el problema se encuentra en $NP$.

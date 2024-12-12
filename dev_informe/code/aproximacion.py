@@ -19,13 +19,10 @@ def verify_position(grid, row, col, rows, cols):
     if rows[row] == 0 or cols[col] == 0:
         return False
 
-    # if row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]):
-    #     return False
-
-    # Check if position is already occupied
+    # Vemos si la posicion esta ocupada
     if grid[row][col] != None:
         return False
-    # Check if position is adjacent to a ship
+    # Vemos si la posicion es adyacente a una nave
     for i in range(-1, 2):
         for j in range(-1, 2):
             if row + i >= 0 and row + i < len(grid) and col + j >= 0 and col + j < len(grid[0]):
@@ -33,15 +30,14 @@ def verify_position(grid, row, col, rows, cols):
                     return False
     return True
 
-
 def try_to_put_ship_horizontally_in_row(ship, grid, idx_f, rows, cols):
 
-    row_to_put_ship = grid[idx_f] # Lista de la fila [3, None, None, None]
+    row_to_put_ship = grid[idx_f]
     for idx_c in range(len(row_to_put_ship)):
 
         can_place = True
         for k in range(ship):
-            if not verify_position(grid, idx_f, idx_c + k, rows, cols): # SI PUEDO PONER EL BARCO EN ESA CELDA
+            if not verify_position(grid, idx_f, idx_c + k, rows, cols): # Veo si puedo poner el barco en esa celda
                 can_place = False
                 break
 
@@ -72,7 +68,7 @@ def aproximation(rows, cols, ships):
                                 break
                         if can_place:
                             for k in range(ship):
-                                grid[indice_fila_max][j + k] = 1 # Se pone el barco
+                                grid[indice_fila_max][j + k] = 1 # Se coloca el barco
                                 rows[indice_fila_max] -= 1
                                 cols[j + k] -= 1
                             break
@@ -88,7 +84,7 @@ def aproximation(rows, cols, ships):
                                 break
                         if can_place:
                             for k in range(ship):
-                                grid[i + k][indice_columna_max] =  1 # Se pone el barco
+                                grid[i + k][indice_columna_max] =  1 # Se coloca el barco
                                 rows[i + k] -= 1
                                 cols[indice_columna_max] -= 1
                             break
