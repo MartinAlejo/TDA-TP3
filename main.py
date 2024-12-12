@@ -35,7 +35,7 @@ def parse_input (path):
                 ships.append(int(x))
         return rows, cols, ships
     
-
+# Verifica si podemos colocar un barco en un casillero
 def verify_position(grid, row, col, rows, cols, demand):
 
     if row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]):
@@ -58,6 +58,7 @@ def verify_position(grid, row, col, rows, cols, demand):
                 
     return True
 
+# Calcula la demanda cumplida para la grilla
 def calculate_score(grid):
     total = 0
     for row in grid:
@@ -66,6 +67,7 @@ def calculate_score(grid):
                 total += 2
     return total
 
+# Calcula la demanda que se cumple si se colocasen todos los barcos a partir de un indice
 def calculate_possible_max_ships(ships, current_index):
     score = 0
     available_ships = ships[current_index:]
@@ -76,7 +78,8 @@ def calculate_possible_max_ships(ships, current_index):
 
     return score
 
-
+# Funcion principal. Dada una demanda de filas, columnas y barcos, maximiza la demanda cumplida (minimiza la
+# demanda incumplida).
 def ship_placement(rows, cols, ships):
     grid = [[None] * len(cols) for _ in range(len(rows))]
     best_solution_grid = [[None] * len(cols) for _ in range(len(rows))]
@@ -89,30 +92,35 @@ def ship_placement(rows, cols, ships):
     print("Total ammount: ", total_amount)
     print_grid(best_solution_grid, rows, cols)
 
+# Coloca el barco horizontalmente
 def place_ship_horizontally(grid, row, col, ship_size, rows, cols):
     for k in range(ship_size):
         grid[row][col + k] = 1
         rows[row] -= 1
         cols[col + k] -= 1
 
+# Coloca el barco verticalmente
 def place_ship_vertically(grid, row, col, ship_size, rows, cols):
     for k in range(ship_size):
         grid[row + k][col] = 1
         rows[row + k] -= 1
         cols[col] -= 1
 
+# Descoloca el barco horizontalmente
 def unplace_ship_horizontally(grid, row, col, ship_size, rows, cols):
     for k in range(ship_size):
         grid[row][col + k] = None
         rows[row] += 1
         cols[col + k] += 1
-        
+
+# Descoloca el barco verticalmente
 def unplace_ship_vertically(grid, row, col, ship_size, rows, cols):
     for k in range(ship_size):
         grid[row + k][col] = None
         rows[row + k] += 1
         cols[col] += 1
 
+# Calcula la cantidad de espacios libres en la grilla
 def available_places(grid):
     empty_places = 0
 
@@ -123,31 +131,35 @@ def available_places(grid):
     
     return empty_places
 
-
+# Funcion de BT para maximizar la demanda cumplida
 def ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship):
     score_grid = calculate_score(grid) 
     score_best = calculate_score(best_solution_grid)
 
+    # Si encontramos una mejor solucion, la pisamos
     if score_grid > score_best:
         for i in range(len(rows)):
             for j in range(len(cols)):
                 best_solution_grid[i][j] = grid[i][j]
     
+    # Caso base
     if (current_idx_ship >= len(ships)): 
         return
 
-    available_spaces = available_places(grid)
-
-    if score_grid <= score_best:    
+    # Poda 1 (la puntuacion que podria llegar a conseguir en el mejor de los casos no supera la mejor conseguida)
+    if score_grid <= score_best:
+        available_spaces = available_places(grid)
         max_possible_score_ships = calculate_possible_max_ships(ships, current_idx_ship)
-        max_possible_score = score_grid + min(max_possible_score_ships, available_spaces)
+        max_possible_score = score_grid + min(max_possible_score_ships, available_spaces * 2)
         if max_possible_score <= score_best:
-            return  
+            return
 
+    # Poda 2 (el barco no entra para ninguna fila/columna por falta de demanda)
     maximo = max(max(rows), max(cols))
     while (ships[current_idx_ship] > maximo) and (current_idx_ship < len(ships)):
         current_idx_ship += 1
     
+    # Con el barco actual, iteramos por la grilla intentando colocarlo
     ship_size = ships[current_idx_ship]
     for i in range(len(rows)):
         if rows[i] == 0: 
@@ -158,7 +170,8 @@ def ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_
             can_place_horizontal = True
             can_place_vertical = True
             demand = 0
-        
+
+            # Vemos si se puede colocar horizontal
             for k in range(ship_size):
                 if (k == 0):
                     demand = rows[i]
@@ -167,6 +180,7 @@ def ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_
                     break
                 demand -= 1
 
+            # Vemos si se puede colocar vertical
             for k in range(ship_size):
                 if (k == 0):
                     demand = cols[j]
@@ -174,6 +188,8 @@ def ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_
                     can_place_vertical = False
                     break
                 demand -= 1
+
+            # Colocamos los barcos segun corresponda
 
             if (can_place_horizontal):
                 place_ship_horizontally(grid, i, j, ship_size, rows, cols)
@@ -185,7 +201,10 @@ def ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_
                 ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship + 1)
                 unplace_ship_vertically(grid, i, j, ship_size, rows, cols)
 
+    # Caso en el que decidimos no colocar el barco
     ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship + 1)
+
+######################## EJECUCION ########################
 
 def run_example(file):
     rows, cols, ships = parse_input("inputs/" + file)
