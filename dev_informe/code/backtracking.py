@@ -50,8 +50,10 @@ def ship_placement(rows, cols, ships):
     total_amount = sum(rows) + sum(cols)
     ships.sort(reverse=True)
 
-    ship_placement_aux(rows[:], cols[:], ships, grid, best_solution_grid,  0)
+    # Llamamos al algoritmo de backtracking
+    ship_placement_aux(rows[:], cols[:], ships, grid, best_solution_grid,  0, set())
 
+    # Imprimimos resultados
     print("Gained ammount: ", calculate_score(best_solution_grid))
     print("Total ammount: ", total_amount)
     print_grid(best_solution_grid, rows, cols)
@@ -94,9 +96,16 @@ def available_places(grid):
                 empty_places += 1
     
     return empty_places
-
 # Funcion de BT para maximizar la demanda cumplida
-def ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship):
+def ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship, memo):
+    
+    # Vemos si ya nos encontramos con este mismo escenario, y de ser asi podamos
+    state = (tuple(rows), tuple(cols), current_idx_ship)
+    if state in memo:
+        return
+    memo.add(state)
+
+    # Calculamos las puntuaciones (demandas cumplidas)
     score_grid = calculate_score(grid) 
     score_best = calculate_score(best_solution_grid)
 
@@ -136,34 +145,40 @@ def ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_
             demand = 0
 
             # Vemos si se puede colocar horizontal
-            for k in range(ship_size):
-                if (k == 0):
-                    demand = rows[i]
-                if (not verify_position(grid, i, j + k, rows, cols, demand)):
-                    can_place_horizontal = False
-                    break
-                demand -= 1
+            if ship_size > rows[i]:
+                can_place_horizontal = False
+            else:
+                for k in range(ship_size):
+                    if (k == 0):
+                        demand = rows[i]
+                    if (not verify_position(grid, i, j + k, rows, cols, demand)):
+                        can_place_horizontal = False
+                        break
+                    demand -= 1
 
             # Vemos si se puede colocar vertical
-            for k in range(ship_size):
-                if (k == 0):
-                    demand = cols[j]
-                if (not verify_position(grid, i + k, j, rows, cols, demand)):
-                    can_place_vertical = False
-                    break
-                demand -= 1
+            if ship_size > cols[j]:
+                can_place_vertical = False
+            else:
+                for k in range(ship_size):
+                    if (k == 0):
+                        demand = cols[j]
+                    if (not verify_position(grid, i + k, j, rows, cols, demand)):
+                        can_place_vertical = False
+                        break
+                    demand -= 1
 
             # Colocamos los barcos segun corresponda
 
             if (can_place_horizontal):
                 place_ship_horizontally(grid, i, j, ship_size, rows, cols)
-                ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship + 1)
+                ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship + 1, memo)
                 unplace_ship_horizontally(grid, i, j, ship_size, rows, cols)
 
             if (can_place_vertical):
                 place_ship_vertically(grid, i, j, ship_size, rows, cols)
-                ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship + 1)
+                ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship + 1, memo)
                 unplace_ship_vertically(grid, i, j, ship_size, rows, cols)
 
     # Caso en el que decidimos no colocar el barco
-    ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship + 1)
+    ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship + 1, memo)
