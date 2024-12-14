@@ -85,23 +85,25 @@ def ship_placement(rows, cols, ships):
     total_amount = sum(rows) + sum(cols)
     ships.sort(reverse=True)
 
+    # Llamamos al algoritmo de backtracking
     ship_placement_aux(rows[:], cols[:], ships, grid, best_solution_grid,  0, set())
 
+    # Imprimimos resultados
     print("Gained ammount: ", calculate_score(best_solution_grid))
     print("Total ammount: ", total_amount)
     print_grid(best_solution_grid, rows, cols)
 
 # Coloca el barco horizontalmente
-def place_ship_horizontally(grid, row, col, ship_size, rows, cols, ship_idx):
+def place_ship_horizontally(grid, row, col, ship_size, rows, cols):
     for k in range(ship_size):
-        grid[row][col + k] = ship_idx
+        grid[row][col + k] = 1
         rows[row] -= 1
         cols[col + k] -= 1
 
 # Coloca el barco verticalmente
-def place_ship_vertically(grid, row, col, ship_size, rows, cols, ship_idx):
+def place_ship_vertically(grid, row, col, ship_size, rows, cols):
     for k in range(ship_size):
-        grid[row + k][col] = ship_idx
+        grid[row + k][col] = 1
         rows[row + k] -= 1
         cols[col] -= 1
 
@@ -205,12 +207,12 @@ def ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_
             # Colocamos los barcos segun corresponda
 
             if (can_place_horizontal):
-                place_ship_horizontally(grid, i, j, ship_size, rows, cols, current_idx_ship)
+                place_ship_horizontally(grid, i, j, ship_size, rows, cols)
                 ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship + 1, memo)
                 unplace_ship_horizontally(grid, i, j, ship_size, rows, cols)
 
             if (can_place_vertical):
-                place_ship_vertically(grid, i, j, ship_size, rows, cols, current_idx_ship)
+                place_ship_vertically(grid, i, j, ship_size, rows, cols)
                 ship_placement_aux(rows, cols, ships, grid, best_solution_grid, current_idx_ship + 1, memo)
                 unplace_ship_vertically(grid, i, j, ship_size, rows, cols)
 
