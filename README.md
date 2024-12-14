@@ -1,6 +1,6 @@
 # Trabajo Práctico 3: Diversión NP-Completa
 
-TP2 de la materia: Teoría de Algoritmos.
+TP3 de la materia: Teoría de Algoritmos.
 
 ## Integrantes
 
