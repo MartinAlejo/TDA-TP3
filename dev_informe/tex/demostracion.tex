@@ -1,33 +1,36 @@
 \section{Demostración: NP-Completo}
 
-Vamos a demostrar que la batalla naval es $NP$ completo. Pero, ¿Como se demuestra que un algortimo es $NP$ completo? Tiene que cumplir dos puntos: 
+Vamos a demostrar que la batalla naval es $NP$ completo. Pero, ¿Como se demuestra que un algortimo es $NP$ completo? Tiene que cumplir dos condiciones: 
 
 \begin{itemize}
     \item \textbf{Pertenencia a NP:} La verificación de una solución candidata es posible en tiempo polinomial.
     \item \textbf{NP-dificultad:} Se puede realizar una reducción polinomial desde cualquier problema NP-completo hacia este problema.
 \end{itemize}
 
-Ya en la sección anterior pudimos verificar con éxito que nuestro problema es de tipo NP, ahora hay que demostrar que se puede realizar una reducción polinomial desde cualquier problema NP-Completo. Recordemos que todos los NP completos pueden ser reducidos despues a cualquier problema NP completo. 
+En la sección anterior pudimos verificar con éxito que nuestro problema es de tipo NP, ahora hay que demostrar que se puede realizar una reducción polinomial desde cualquier problema NP-Completo. Recordemos que todos los problemas NP-Completos pueden reducirse a cualquier problema NP-Completo. 
 
-En nuestro caso, utilizaremos el problema de \textit{2-Partition}, que como fue demostrado anteriormente en clase, es un problema NP-Completo, para verificar que el problema de la batalla naval pertenece a NP-Completo. Es decir, se puede realizar la reduccion polinomial: $\text{2\-Partition} \leq_p \text{PBN}$
-
+En nuestro caso, utilizaremos el problema de \textit{2-Partition}, que como fue demostrado anteriormente en clase, es un problema NP-Completo, para verificar que el problema de la batalla naval pertenece a NP-Completo. Es decir, se puede realizar la reduccion polinomial: \textbf{2-Partition} $\leq_p$ \textbf{PBN}
+\vskip0.5cm
 \subsection*{Definiciones}
 
-\textbf{2-Partition}: Se tiene un conjunto $S$ de enteros positivos, y dos subconjuntos $S_1$ y $S_2$, tales que se tengan que cumplir algunos requisitos:
+\textbf{2-Partition}: Se tiene un conjunto $S$ de enteros positivos, y dos subconjuntos $S_1$ y $S_2$, tales que se cumple:
 \begin{itemize}
     \item Los subconjuntos son disjuntos
     \item La unión de los subconjuntos es el conjunto original
-    \item $\text{sum}(S_1) + \text{sum}(S_2) = \text{sum}(S)$. siendo $\text{sum}(S_1) = \text{sum}(S_2)$
+    \item $\text{sum}(S_1) + \text{sum}(S_2) = \text{sum}(S)$
+    \item $\text{sum}(S_1) = \text{sum}(S_2)$
 \end{itemize}
 
 \textbf{Ejemplo}:
-$S = \{3, 3, 4, 4\}, \quad S_1 = \{3, 4\}, \quad S_2 = \{3, 4\} \quad \rightarrow \quad \text{sum}(S) = 14 = \text{sum}(S_1) + \text{sum}(S_2) = 7 + 7$
 
-\textbf{Problema de la Batalla Naval}: Dado un tablero de $n \times m$, una lista de $k$ barcos (donde el barco $i$ tiene longitud $b_i$), una lista de restricciones para filas (demandas de casilleros ocupados en cada fila) y otra para columnas, determinar si existe una forma válida de ubicar los barcos en el tablero cumpliendo las restricciones, **sin que los barcos sean adyacentes** (ni horizontal, ni vertical, ni diagonalmente).
+$S =\{3, 3, 4, 4\},\quad S_1 = \{3, 4\},\quad S_2 = \{3, 4\} \quad \rightarrow \quad \text{sum}(S)= 14 = \text{sum}(S_1) + \text{sum}(S_2) = 7 + 7$
+
+\vskip0.5cm
+\textbf{Problema de la Batalla Naval}: Dado un tablero de $n \times m$, una lista de $k$ barcos (donde el barco $i$ tiene longitud $b_i$), una lista de restricciones para filas (demandas de casilleros ocupados en cada fila) y otra para columnas, determinar si existe una forma válida de ubicar los barcos en el tablero cumpliendo las restricciones, sin que los barcos sean adyacentes.
 
 \subsection*{Planteo del problema}
 
-Vamos a utilizar el conjunto visto anteriormente ($S = {3,3,4,4}$), o sea una instancia del problema de 2-Partition, la cual resolveremos utilizando el problema de la batalla naval.
+Vamos a utilizar el conjunto visto anteriormente ($S = \{3,3,4,4\}$), o sea una instancia del problema de 2-Partition, la cual resolveremos utilizando el problema de la batalla naval.
 
 Para ello, debemos crear un tablero de dimensiones $i \times j$, donde $i$ son la cantidad de filas, y $j$ la cantidad de columnas.
 
@@ -36,20 +39,26 @@ Para ello, debemos crear un tablero de dimensiones $i \times j$, donde $i$ son l
     \item Cantidad de filas ($i$) = $sum(S) + n - 1  = (T + 4 - 1 ) = 17$
     \item Cantidad de columnas ($j$) = $2$ 
 \end{itemize}
+\vskip0.5cm
 
-\textbf{Nota}: Siendo $n$ la cantidad de elementos del conjunto $S$, y $T$ la $\text{sum}(S)$
+\textbf{Nota}: Siendo $n$ la cantidad de elementos del conjunto $S$, y $T = \sum_{i=1}^{n} a_i \quad \text{con} \quad a_i \in S$
+
+\vskip0.25cm
+
 \textbf{Nota}: La cantidad de columnas proviene de la cantidad de subconjuntos (2).
+
+\vskip0.5cm
 
 \textbf{Modelo del problema}:
 
 \begin{itemize}
-    \item \textbf{Lista de barcos:} Cada elemento $a_i \in S$ corresponde a un barco de longitud $a_i$. Por ejemplo, con $S$, los barcos serán de longitudes $3, 3, 4, 4$.
+    \item \textbf{Lista de barcos:} Cada elemento $a_i \in S$ corresponde a un barco de longitud $a_i$. Para nuestro ejemplo, los barcos serían de longitudes $3, 3, 4, 4$.
 
     \item \textbf{Restricciones de las columnas:}
-    Cada columna debe contener exactamente $T / 2$ casilleros ocupados. Si $T$ es impar, entonces la instancia de 2-Partition no tiene solución, y por ende, tampoco la instancia del problema de la Batalla Naval.
+    Cada columna debe contener exactamente $T / 2$ casilleros ocupados. 
 
     \item \textbf{Restricciones de las filas:}
-    Cada fila puede contener como máximo un casillero ocupado por barco. Las $n - 1$ filas adicionales aseguran que los barcos no serán adyacentes entre sí (ni horizontal, ni vertical, ni diagonalmente).
+    Cada fila puede contener como máximo un casillero ocupado. Al tener $n - 1$ filas adicionales, nos aseguramos que los barcos no sean adyacentes entre sí. Ya que tras colocar un barco dejamos una fila vacía.
 \end{itemize}
 
 \vskip0.25cm
@@ -59,55 +68,60 @@ Ejemplo del tablero:
 \begin{center}
 \[
     \begin{bmatrix}
-    0 & \text{None} \\
-    0 & \text{None} \\
-    0 & \text{None} \\
-    \text{None} & \text{None} \\
-    \text{None} & 1 \\
-    \text{None} & 1 \\
-    \text{None} & 1 \\
-    \text{None} & \text{None} \\
-    2 & \text{None} \\
-    2 & \text{None} \\
-    2 & \text{None} \\
-    2 & \text{None} \\
-    \text{None} & \text{None} \\
-    \text{None} & 3 \\
-    \text{None} & 3 \\
-    \text{None} & 3 \\
-    \text{None} & 3
+    1 & \text{-} \\
+    1 & \text{-} \\
+    1 & \text{-} \\
+    \text{-} & \text{-} \\
+    \text{-} & 2 \\
+    \text{-} & 2 \\
+    \text{-} & 2 \\
+    \text{-} & \text{-} \\
+    3 & \text{-} \\
+    3 & \text{-} \\
+    3 & \text{-} \\
+    3 & \text{-} \\
+    \text{-} & \text{-} \\
+    \text{-} & 4 \\
+    \text{-} & 4 \\
+    \text{-} & 4 \\
+    \text{-} & 4
     \end{bmatrix}
 \]
 \end{center}
 
-Los barcos de columna 1 = $S_{1} = {a_{1}, a_{2},...,a_{k}} = {3, 4}$ 
-Los barcos de columna 2 = $S_{2} = {a_{k +1}, a_{k + 2},..., a_{n}} = {3, 4}$
-
+Los barcos pertenecientes a la primer columna = $S_{1} = {a_{1}, a_{2},...,a_{q}} = \{3, 4\}$ 
+\vskip0.25cm
+Los barcos pertenecientes a la segunda columna = $S_{2} = {a_{q +1}, a_{q + 2},..., a_{n}} = \{3, 4\}$
+\vskip0.5cm
 \subsection*{Demostración de la Reducción}
 
-\paragraph{($\Rightarrow$) Si existe una solución para 2-Partition:}  
-
+\paragraph{ Si existe una solución para 2-Partition:}
+  
 Sea $S_1$ y $S_2$ la partición de $S$ tal que $\text{sum}(S_1) = \text{sum}(S_2) = T / 2$.  
 
 En el problema de la Batalla Naval:
 
 \begin{itemize}
-    \item Colocamos los barcos correspondientes a los elementos de $S_1$ en la primera columna.
-    \item Colocamos los barcos correspondientes a los elementos de $S_2$ en la segunda columna.
+    \item Colocamos los barcos pertenecientes a los elementos de $S_1$ en la primera columna.
+    \item Colocamos los barcos pertenecientes a los elementos de $S_2$ en la segunda columna.
     \item Aseguramos que entre dos barcos haya al menos una fila vacía, cumpliendo la condición de no adyacencia.
 \end{itemize}
 
 Como cada columna tiene exactamente $T / 2$ casilleros ocupados y los barcos están distribuidos sin ser adyacentes, la instancia del problema de la Batalla Naval tiene una solución válida.
 
-\paragraph{($\Leftarrow$) Si existe una solución para el problema de la Batalla Naval:}
+\paragraph{Si existe una solución para el problema de la Batalla Naval:}
 
-Sea una configuración válida de los barcos en el tablero.  
+
+Sea una distribución válida de los barcos en el tablero.  
+
 \begin{itemize}
     \item Los barcos en la primera columna representan un subconjunto $S_1$ de $S$, y los barcos en la segunda columna representan otro subconjunto $S_2$.
     \item Como cada columna tiene exactamente $T / 2$ casilleros ocupados, tenemos que $\text{sum}(S_1) = \text{sum}(S_2) = T / 2$.
-    \item Esto implica que $S_1$ y $S_2$ al ser dinjuntos, forman una partición válida del conjunto $S$, resolviendo la instancia de 2-Partition.
+    \item $S_1$ y $S_2$ al ser disjuntos, la unión de estos da como resultado el conjunto $S$, resolviendo la instancia de 2-Partition.
 \end{itemize}
 
-\subsection*{Conclusión:}
+\subsection*{Conclusión}
 
 La reducción transforma una instancia de 2-Partition en una instancia del problema de la Batalla Naval en tiempo polinomial, ya que la construcción del tablero y las restricciones toma tiempo proporcional a $n$, el tamaño del conjunto $S$.
+
+Por lo tanto, hemos desmotrado que es posible realizar la reducción polinomial: 2-Partition $\leq_p$ PBN.

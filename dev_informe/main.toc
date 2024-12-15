@@ -6,8 +6,8 @@
 \contentsline {subsection}{\numberline {1.4}Codigo}{5}{subsection.1.4}%
 \contentsline {subsection}{\numberline {1.5}Conclusion}{5}{subsection.1.5}%
 \contentsline {section}{\numberline {2}Demostración: NP-Completo}{5}{section.2}%
-\contentsline {paragraph}{($\Rightarrow $) Si existe una solución para 2-Partition:}{7}{section*.7}%
-\contentsline {paragraph}{($\Leftarrow $) Si existe una solución para el problema de la Batalla Naval:}{7}{section*.8}%
+\contentsline {paragraph}{ Si existe una solución para 2-Partition:}{7}{section*.7}%
+\contentsline {paragraph}{Si existe una solución para el problema de la Batalla Naval:}{7}{section*.8}%
 \contentsline {section}{\numberline {3}Algoritmo de Backtracking}{8}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Codigo}{8}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Análisis}{11}{subsection.3.2}%
