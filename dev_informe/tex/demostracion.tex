@@ -1,20 +1,24 @@
 \section{Demostración: NP-Completo}
 
+
 \subsection*{Reducción desde el problema 3-Partition}
 
-Vamos a demostrar que la batalla naval es $NP$-Completo. Pero, ¿Cómo se demuestra que un problema es $NP$-Completo? Tiene que cumplir dos condiciones: 
+Vamos a demostrar que la batalla naval es $NP$-Completo. Pero, ¿Como se demuestra que un problema es $NP$-Completo? Tiene que cumplir dos condiciones: 
 
 \begin{itemize}
     \item \textbf{Pertenencia a NP:} La verificación de una solución candidata es posible en tiempo polinomial.
     \item \textbf{NP-dificultad:} Se puede realizar una reducción polinomial desde cualquier problema NP-completo hacia este problema.
 \end{itemize}
 
-Ya en la sección anterior pudimos verificar con éxito que nuestro problema pertenece a $NP$, ahora hay que demostrar que se puede realizar una reducción polinomial desde cualquier problema $NP$-Completo. Recordemos que todos los $NP$-completos pueden ser reducidos a cualquier otro problema $NP$-Completo. 
+Ya en la sección anterior pudimos verificar con éxito que nuestro problema es un problema NP, ahora hay que demostrar que se puede realizar una reducción polinomial desde cualquier problema NP-Completo. Recordemos que todos los NP completos pueden ser reducidos despues cualquier problema NP completo. 
 
-En nuestro caso, utilizaremos el problema de \textit{3-Partition}, que como vamos a demostrar más abajo, es un problema $NP$-Completo, para verificar que el problema de la batalla naval pertenece a $NP$-Completo. Es decir, se puede realizar la reducción polinomial: \textbf{3-Partition} $\leq_p$ \textbf{PBN}.
+En nuestro caso, utilizaremos el problema de \textit{3-Partition}, que como demostraremos más abajo, es un problema NP-Completo, para verificar que el problema de la batalla naval pertenece a NP-Completo. Es decir, se puede realizar la reduccion polinomial: \textbf{3-Partition} $\leq_p$ \textbf{PBN}.
+
+Definamos un poco cómo se compone el problema \textit{3-Partition}.
 
 \subsubsection*{Definición del problema 3-Partition}
 
+% IMPORTANTE: Creo que lo que estamos haciendo no es la version unaria %
 Dado un conjunto de \(3m\) números positivos \(A = \{a_1, a_2, \dots, a_{3m}\}\), donde cada número está representado en notación unaria y la suma total de los números es \(S = m \cdot B\), queremos particionar \(A\) en \(m\) subconjuntos disjuntos \(S_1, S_2, \dots, S_m\) tales que:
 
 \begin{itemize}
@@ -22,69 +26,108 @@ Dado un conjunto de \(3m\) números positivos \(A = \{a_1, a_2, \dots, a_{3m}\}\
     \item La suma de los elementos en cada subconjunto es exactamente \(B\).
 \end{itemize}
 
-----------------------------------------------------------------------------------------------------------
+\section*{Reducción de 2-Partition a 3-Partition}
+
+\subsection*{Definiciones}
+
+\textbf{2-Partition:} El problema consiste en dividir un conjunto de números \( A = \{a_1, a_2, \dots, a_n\} \) en dos subconjuntos disjuntos \( S_1 \) y \( S_2 \) tales que la suma de los elementos de ambos subconjuntos sea igual.
+
+\textbf{3-Partition:} El problema consiste en dividir un conjunto \( B = \{b_1, b_2, \dots, b_{3m}\} \) en \( m \) subconjuntos disjuntos \( T_1, T_2, \dots, T_m \), cada uno de exactamente 3 elementos, tales que la suma de los elementos en cada subconjunto sea la misma.
+
+\subsection*{Reducción}
+
+Para reducir polinomialmente una instancia de \textbf{2-Partition} a una instancia de \textbf{3-Partition}, hacemos lo siguiente:
+
+%TODO: Reduccion%
 
 \subsection*{Reducción de 3-Partition a La Batalla Naval}
 
 Dado una instancia del problema \textit{3-Partition}, construiremos una instancia del problema \textit{La Batalla Naval}.
 
 \paragraph{Construcción del tablero:}
-
 \begin{itemize}
-    \item \textbf{Dimensiones del tablero:}
-    \begin{itemize}
-        \item Cantidad de filas: \(m \times 2 - 1\). Cada subconjunto \(S_i\) ocupa una fila, y se agrega una fila vacía después de cada subconjunto excepto después del último.
-        \item Cantidad de columnas: \(B + 2\). Esto incluye la suma de cada subconjunto (\(B\)) más dos espacios vacíos para evitar la adyacencia horizontal entre barcos.
-    \end{itemize}
-
-    \item \textbf{Restricciones de las filas:}
-    \begin{itemize}
-        \item Las filas que contienen subconjuntos tienen una restricción igual a \(B\) (\(r_i = B\)).
-        \item Las filas vacías (entre subconjuntos) tienen una restricción igual a 0 (\(r_i = 0\)).
-    \end{itemize}
-
-    \item \textbf{Restricciones de las columnas:}
-    Las restricciones de las columnas (\(c_j\)) serán los elementos del conjunto \(A = \{a_1, a_2, \dots, a_{3m}\}\). Es decir, cada columna \(j\) tendrá una restricción igual a \(a_j\).
-
-    \item \textbf{Barcos:}
-    Introducimos \(3m\) barcos, uno por cada elemento de \(A\), donde el barco \(b_j\) tiene una longitud igual a \(a_j\).
+    \item \textbf{Dimensiones del tablero:} Construimos un tablero con \(m\) filas (una fila para cada subconjunto \(S_i\)) y \(3m\) columnas (una columna para cada elemento de A).
+    \item \textbf{Restricciones de las filas:} Las restricciones de las filas (\(r_i\)) serán \(B\), es decir, cada fila \(i\) debe contener exactamente \(B\) casillas ocupadas.
+    \item \textbf{Restricciones de las columnas:} Las restricciones de las columnas (\(c_j\)) serán los elementos del conjunto \(A = \{a_1, a_2, \dots, a_{3m}\}\). Es decir, la columna \(j\) tendrá una restricción igual a \(a_j\).
+    \item \textbf{Barcos:} Introducimos \(3m\) barcos, uno por cada elemento de \(A\), donde el barco \(b_j\) tiene una longitud igual a \(a_j\).
 \end{itemize}
 
 \paragraph{Ejemplo de construcción:}
+Veamos con un ejemplo para poner en contexto lo que estamos diciendo:
 
-Dado el conjunto \(A = \{5, 2, 7, 5, 2, 1, 9, 1, 1\}\), con \(m = 3\) subconjuntos y \(B = 11\), consideremos los subconjuntos:
-
-\[
-S_1 = \{5, 5, 1\}, \quad S_2 = \{7, 2, 2\}, \quad S_3 = \{9, 1, 1\}.
-\]
-
-El tablero construido tendrá:
+\vskip0.5cm
+Tenemos los siguientes datos del problema 3-Partition: 
 
 \begin{itemize}
-    \item Cantidad de filas = \(m \times 2 - 1 = 5\). Tres para cada uno de los subconjuntos, y dos vacías intercaladas para evitar adyacencias.
-    \item Cantidad de columnas = \(B + 2 = 11 + 2 = 13\).
+    \item $A = \{6, 5, 4, 5, 3, 7\}$,
+    \item $B = 15$, porque por ejemplo si tengo los subconjuntos $S_{1}={6,5,4}$ y $S_{2}={5,3,7}$ la suma de los elementos de $S_{1}$ es 15 al igual que la suma de los elementos de $S_{2}$ 
+    \item $m = 2$, porque $|A| = 6 = 3 \times 2 = 3 \times m$
 \end{itemize}
 
-El tablero sería:
+\subsection*{Ajustando el Tablero}
 
-\[
-\begin{array}{ccccccccccccc}
-0 & 0 & 0 & 0 & 0 & - & 3 & 3 & 3 & 3 & 3 & - & 5 \\
-- & - & - & - & - & - & - & - & - & - & - & - & - \\
-2 & 2 & 2 & 2 & 2 & 2 & 2 & - & 1 & 1 & - & 4 & 4 \\
-- & - & - & - & - & - & - & - & - & - & - & - & - \\
-6 & 6 & 6 & 6 & 6 & 6 & 6 & 6 & 6 & - & 7 & - & 8 \\
-\end{array}
-\]
+Para que cada fila pueda contener exactamente $r_i = 15$ casillas ocupadas, necesitamos que el número de columnas del tablero sea suficiente para permitir esa suma. Ajustamos las dimensiones del tablero:
 
-\paragraph{Relación con 3-Partition:}
 \begin{itemize}
-    \item Cada subconjunto \(S_i\) corresponde a una fila del tablero.
-    \item Los elementos del subconjunto \(S_i\) corresponden a barcos que ocupan exactamente \(B\) celdas en esa fila.
-    \item Si se puede configurar el tablero cumpliendo todas las restricciones, entonces existe una partición válida para \(3\)-Partition, y viceversa.
+    \item $n = 2$ filas (porque $m = 2$, el número de subconjuntos). % Quiza habria que agregar filas vacias intercaladas
+    \item $m = 15$ columnas (ya que cada fila debe contener hasta 15 casillas ocupadas). % Quiza habria que agregar siempre 2 columnas
 \end{itemize}
 
-\subsection*{Equivalencia de las instancias}
+Por lo tanto, el tablero tiene $2 \times 15 = 30$ casillas, lo cual coincide con la suma total de $\sum A = 30$. % Entiuendo que estaria mal tras hacer las correcciones de arriba %
+
+\subsection*{Nueva Configuración}
+
+\begin{enumerate}
+    \item \textbf{Restricciones de Filas y Columnas:}
+    \begin{itemize}
+        \item Cada fila $i$ debe tener exactamente $r_i = B = 15$ casillas ocupadas.
+        \item Cada columna $j$ debe contener exactamente $c_j = a_j$, con $A = \{6, 5, 4, 5, 3, 7\}$.
+    \end{itemize}
+
+    \item \textbf{Barcos:}
+    Introducimos un barco para cada elemento en $A$:
+    \begin{itemize}
+        \item Barco 1: longitud 6,
+        \item Barco 2: longitud 5,
+        \item Barco 3: longitud 4,
+        \item Barco 4: longitud 5,
+        \item Barco 5: longitud 3,
+        \item Barco 6: longitud 7.
+    \end{itemize}
+
+    \item \textbf{Restricciones Adicionales:}
+    \begin{itemize}
+        \item Los barcos no pueden ser adyacentes entre sí (ni horizontal, ni vertical, ni diagonalmente).
+        \item Todos los barcos deben estar dentro del tablero, y la suma total de las celdas ocupadas debe ser $\sum A = 30$.
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Solución del Problema de Batalla Naval}
+
+Dado el tablero con $n = 2$ filas y $m = 15$ columnas, encontramos la siguiente distribución:
+
+\begin{itemize}
+    \item \textbf{Fila 1 ($S_1$):} Barcos $\{6, 5, 4\}$, que suman $6 + 5 + 4 = 15$.
+    \item \textbf{Fila 2 ($S_2$):} Barcos $\{5, 3, 7\}$, que suman $5 + 3 + 7 = 15$.
+\end{itemize}
+
+Esto satisface las restricciones de las filas ($r_i = 15$) y las columnas ($c_j = a_j$).
+
+\subsection*{Relación entre 3-Partition y Batalla Naval}
+
+\begin{enumerate}
+    \item Resolver el problema de \textit{La Batalla Naval} (encontrar la disposición de los barcos en el tablero) equivale a resolver el problema de 3-Partition:
+    \begin{itemize}
+        \item Cada fila representa un subconjunto de $A$.
+        \item La longitud de los barcos en cada fila corresponde a los elementos del subconjunto.
+        \item La suma de las longitudes de los barcos en cada fila debe ser igual a $B = 15$.
+    \end{itemize}
+
+    \item Si no existe una solución para el tablero naval, no existe una partición válida en el problema de 3-Partition.
+\end{enumerate}
+
+
+\subsubsection*{Equivalencia de las instancias}
 
 \begin{itemize}
     \item Si existe una solución para el problema \textit{3-Partition}, entonces podemos construir una configuración válida del tablero para \textit{La Batalla Naval}.
