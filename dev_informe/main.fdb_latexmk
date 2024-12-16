@@ -1,10 +1,10 @@
 # Fdb version 3
-["biber main"] 1734235098 "main.bcf" "main.bbl" "main" 1734313509
-  "main.bcf" 1734313509 106594 d0a4d0e1c136c0a864bb82402f3a8ea5 "pdflatex"
+["biber main"] 1734382084 "main.bcf" "main.bbl" "main" 1734382634
+  "main.bcf" 1734382634 106594 d0a4d0e1c136c0a864bb82402f3a8ea5 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1734313507 "/home/martin/TDA/TP3/dev_informe/main.tex" "main.pdf" "main" 1734313509
+["pdflatex"] 1734382632 "/home/martin/TDA/TP3/dev_informe/main.tex" "main.pdf" "main" 1734382634
   "/etc/texmf/web2c/texmf.cnf" 1726336337 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/martin/TDA/TP3/dev_informe/main.tex" 1733975501 2615 38668bb1f42c0d06014f0827c97261fe ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -238,19 +238,19 @@
   "images/cuadradosMinimos.png" 1733979893 28996 51a77fc56cb20df94c061358f1b47fd9 ""
   "images/image.png" 1733979932 35839 d78d909a4e72189d4f654648c4a5d2dc ""
   "logo.pdf" 1731789608 23517 55dcbdbcb3a7201e9413943da9c8afa3 ""
-  "main.atfi" 1734313509 23 33e109ecf84d2ac55814cb2442ea01dc "pdflatex"
-  "main.aux" 1734313509 4017 d633d7d79a7389e3e11bef5edf963a5b "pdflatex"
-  "main.bbl" 1734235098 0 d41d8cd98f00b204e9800998ecf8427e "biber main"
-  "main.out" 1734313509 2708 7b4f6ee9cbf32858636086f879c9524c "pdflatex"
-  "main.run.xml" 1734313509 2274 3c9efbcb7467da793e6933a55675e6bc "pdflatex"
+  "main.atfi" 1734382634 23 33e109ecf84d2ac55814cb2442ea01dc "pdflatex"
+  "main.aux" 1734382634 4018 6950049b5c2796c2a808d00a48429c53 "pdflatex"
+  "main.bbl" 1734382085 0 d41d8cd98f00b204e9800998ecf8427e "biber main"
+  "main.out" 1734382634 2708 7b4f6ee9cbf32858636086f879c9524c "pdflatex"
+  "main.run.xml" 1734382634 2274 3c9efbcb7467da793e6933a55675e6bc "pdflatex"
   "main.tex" 1733975501 2615 38668bb1f42c0d06014f0827c97261fe ""
-  "main.toc" 1734313509 1524 add0c8b145f278c6dd702bd5345db21e "pdflatex"
+  "main.toc" 1734382634 1524 15285610ba0147edeb595fbfec5f6134 "pdflatex"
   "tex/algoritmos.tex" 1733985254 2697 17edd4c3dec20f2229a2c21ce3c46f8c ""
   "tex/aproximacion.tex" 1733985333 2388 0191883afbc57fd464f1248d0bf089ea ""
   "tex/complejidad.tex" 1734026698 1214 0e449ef4c1d5c5d0c81db015c7e15259 ""
   "tex/conclusiones.tex" 1734277975 865 905a7d2335ed9970150e4face863891c ""
   "tex/consigna.tex" 1733981657 4078 27bd25e1920e89b559b383ca44ae789e ""
-  "tex/demostracion.tex" 1734313507 7608 4933a502029b575b6c9ef160f295eec7 ""
+  "tex/demostracion.tex" 1734382632 10941 d30a690f6177fc5057a4fc9361cda593 ""
   "tex/ejemplosDeSolucion.tex" 1733985510 164 e2b8f927d3ef772d0d602abb87bc0552 ""
   "tex/medicionEmpirica.tex" 1733985583 1097 dc50bb721cf9d4a0ea4b9229b1f324ea ""
   (generated)

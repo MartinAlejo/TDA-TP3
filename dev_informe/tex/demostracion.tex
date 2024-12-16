@@ -1,7 +1,7 @@
 \section{Demostración: NP-Completo}
 
 
-\subsection*{Reducción desde el problema 3-Partition}
+\subsection*{Reducción desde el problema 3-Partition en su version unaria}
 
 Vamos a demostrar que la batalla naval es $NP$-Completo. Pero, ¿Como se demuestra que un problema es $NP$-Completo? Tiene que cumplir dos condiciones: 
 
@@ -16,15 +16,28 @@ En nuestro caso, utilizaremos el problema de \textit{3-Partition}, que como demo
 
 Definamos un poco cómo se compone el problema \textit{3-Partition}.
 
+\textbf{Nota}: Por simplificacion, siempre que hablemos de 3-Partition, nos estamos refiriendo a la version unaria del problema.
+
 \subsubsection*{Definición del problema 3-Partition}
 
-% IMPORTANTE: Creo que lo que estamos haciendo no es la version unaria %
-Dado un conjunto de \(3m\) números positivos \(A = \{a_1, a_2, \dots, a_{3m}\}\), donde cada número está representado en notación unaria y la suma total de los números es \(S = m \cdot B\), queremos particionar \(A\) en \(m\) subconjuntos disjuntos \(S_1, S_2, \dots, S_m\) tales que:
+Dado un conjunto de enteros positivos \(S = \{a_1, a_2, \dots, a_{n}\}\), donde cada número está representado en notación unaria, decide si el conjunto puede partirse en 3 subconjuntos disjuntos \(S_1, S_2, S_3\), tal que la suma de cada subconjunto sea la misma. Es decir:
 
 \begin{itemize}
-    \item Cada subconjunto \(S_i\) tiene exactamente 3 elementos.
-    \item La suma de los elementos en cada subconjunto es exactamente \(B\).
+    \item La suma de los elementos de cada subconjunto \(S_i\) = m
+    \item sum(S) = \(sum(S_1) + sum(S_2) + sum(S_3)\) = 3m
 \end{itemize}
+
+Veamos un ejemplo: 
+
+$S = \{1, 111, 11, 1, 1, 1\}$
+
+\textbf{Nota}: Es la representacion unaria de $S = \{1, 3, 2, 1, 1, 1\}$
+
+Una solución a esta instancia del problema de 3-Partition es la siguiente:
+
+$S_1 = \{111\}$, $S_2 = \{11, 1\}$, $S_3 = \{1, 1, 1\}$
+
+Vemos que es solución, ya que se cumple que la suma de los elementos en cada subconjunto $S_i = 3$. %Y los subconjuntos S_i son disjuntos.%
 
 \section*{Reducción de 2-Partition a 3-Partition}
 
@@ -32,13 +45,46 @@ Dado un conjunto de \(3m\) números positivos \(A = \{a_1, a_2, \dots, a_{3m}\}\
 
 \textbf{2-Partition:} El problema consiste en dividir un conjunto de números \( A = \{a_1, a_2, \dots, a_n\} \) en dos subconjuntos disjuntos \( S_1 \) y \( S_2 \) tales que la suma de los elementos de ambos subconjuntos sea igual.
 
-\textbf{3-Partition:} El problema consiste en dividir un conjunto \( B = \{b_1, b_2, \dots, b_{3m}\} \) en \( m \) subconjuntos disjuntos \( T_1, T_2, \dots, T_m \), cada uno de exactamente 3 elementos, tales que la suma de los elementos en cada subconjunto sea la misma.
+\textbf{3-Partition:} El problema consiste en dividir un conjunto de números (en representacion unaria) \( B = \{b_1, b_2, \dots, b_n\} \) en tres subconjuntos disjuntos \( S_1, S_2, S_3 \), tales que la suma de los elementos en cada subconjunto sea la misma.
+
+\subsection*{Pertenencia a NP}
+
+Primero hay que demostrar que 3-Partition pertenece a NP, para ello, debemos poder encontrar un validador que valide una solución al problema de 3-Partition en tiempo polinomial. Dicho validador es el siguiente:
+
+Dado \( S = \{a_1, a_2, \dots, a_n\} \), y tres subconjuntos $S_1$, $S_2$, y $S_3$, se valida que:
+
+\begin{itemize}
+    \item $S$, $S_1$, $S_2$, $S_3$ estan en representacion unaria (lo estan si su representacion consiste en $a_i$ veces el numero 1)
+    \item $sum(S_1)$ = $sum(S_2)$ = $sum(S_3)$
+    \item $S_1$ $\cup$ $S_2$ $\cup$ $S_3$ = $S$
+    \item $S_1$ $\cap$ $S_2$ $\cap$ $S_3$ = $\emptyset$
+\end{itemize}
+
+Dado que verificar la representacion unaria, comprobar que los subconjuntos son disjuntos, calcular la suma de los elementos de cada subconjunto, verificar que la sumas de cada subconjunto son iguales, se puede hacer en tiempo polinomial, decimos que 3-Partition esta en NP.
 
 \subsection*{Reducción}
 
 Para reducir polinomialmente una instancia de \textbf{2-Partition} a una instancia de \textbf{3-Partition}, hacemos lo siguiente:
 
-%TODO: Reduccion%
+Consideramos el conjunto \( S = \{a_1, a_2, \dots, a_n\} \) tal que $sum(S) = 2m$. Donde $m = sum(S_1) = sum(S_2)$.
+
+Lo que debemos hacer, es calcular m, y agregarlo al conjunto S. Luego, realizamos la representacion unaria de los elementos de S, y resolvemos el problema usando la caja negra de 3-Partition. Si hay solución para 3-Partion, hay solución para 2-Partition.
+
+Veamoslo con un ejemplo:
+
+$S = \{3, 4, 3, 4\}$. Una solución al problema de 2-Partition es la siguiente: $S_1 = \{3, 4\}$, $S_2 = \{3, 4\}$. Pero vamos a resolverlo usando 3-Partition de la forma que mencionamos arriba, es decir, vamos a transformar esta instancia a una que pueda resolverse con 3-Partition.
+
+Vemos que $m = sum(S)$ $/$ $2 = (3 + 4 + 3 + 4)$ $/$ $2 = 7$, entonces al agregar a $m$ al conjunto $S$ y representar todo de forma unaria, tenemos $S = \{111, 1111, 111, 1111, 1111111\}$. Y usando la caja negra de 3-Partition, vemos que hay solución. De hecho, es la siguiente:
+
+$S_1 = \{111, 1111\}$, $S_2 = \{111, 1111\}$, $S_3 = \{1111111\}$.
+
+\textbf{Nota}: Siempre vamos a encontrar que el tercer subconjunto va a ser exactamente m, y por lo tanto, sumar exactamente m tambien (que es lo que por supuesto, suman los otros 2 subconjuntos).
+
+Si pudimos encontrar estos 3 subconjuntos, implica que hay solución para 2-Partition, ya que ahora en 3-Partition $sum(S) = 3m = 2m + m$, y esto solo sucede si $sum(S_1) = sum(S_2) = sum(S_3) = m$, que significa que en la instancia original de 2-Partition existe solución tal que $sum(S) = 2m$, siendo $sum(S_1) = m$, $sum(S_2) = m$.
+
+Dado que encontrar m, agregar m al conjunto S y representar a los elementos de S en forma unaria, pueden hacerse en tiempo polinomial. Entonces pudimos hacer la reduccion \textbf{2-Partition} $\leq_p$ \textbf{3-Partition}. Quedando demostrado que 3-Partition pertenece a NP-Completo.
+
+% DE ACA PARA ABAJO LA MAYOR PARTE ESTA MAL (HAY QUE REHACER USANDO LA VERSION UNARIA DE LA VARIACION DEL 3-PARTITION)
 
 \subsection*{Reducción de 3-Partition a La Batalla Naval}
 

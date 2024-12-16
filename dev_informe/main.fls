@@ -1516,6 +1516,9 @@ INPUT ./logo.pdf
 INPUT ./logo.pdf
 INPUT logo.pdf
 INPUT ./logo.pdf
+INPUT ./logo.pdf
+INPUT logo.pdf
+INPUT ./logo.pdf
 INPUT ./tex/complejidad.tex
 INPUT ./tex/complejidad.tex
 INPUT ./tex/complejidad.tex

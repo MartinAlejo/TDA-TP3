@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.14)  15 DEC 2024 22:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.14)  16 DEC 2024 17:57
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1216,7 +1216,7 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 [5]
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
-Package pdftex.def Info: logo.pdf  used on input line 49.
+Package pdftex.def Info: logo.pdf  used on input line 53.
 (pdftex.def)             Requested size: 71.13188pt x 25.89293pt.
 
 
@@ -1229,7 +1229,7 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 [6]
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
-Package pdftex.def Info: logo.pdf  used on input line 102.
+Package pdftex.def Info: logo.pdf  used on input line 96.
 (pdftex.def)             Requested size: 71.13188pt x 25.89293pt.
 
 
@@ -1239,7 +1239,20 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[7]) (./tex/complejidad.tex (./code/backtracking.py
+[7]
+File: logo.pdf Graphic file (type pdf)
+<use logo.pdf>
+Package pdftex.def Info: logo.pdf  used on input line 148.
+(pdftex.def)             Requested size: 71.13188pt x 25.89293pt.
+
+
+Package fancyhdr Warning: \headheight is too small (27.0pt): 
+(fancyhdr)                Make it at least 29.49297pt, for example:
+(fancyhdr)                \setlength{\headheight}{29.49297pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
+
+[8]) (./tex/complejidad.tex (./code/backtracking.py
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
 Package pdftex.def Info: logo.pdf  used on input line 11.
@@ -1252,7 +1265,7 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[8]
+[9]
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
 Package pdftex.def Info: logo.pdf  used on input line 68.
@@ -1265,7 +1278,7 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[9]
+[10]
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
 Package pdftex.def Info: logo.pdf  used on input line 135.
@@ -1278,7 +1291,7 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[10])
+[11])
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
 Package pdftex.def Info: logo.pdf  used on input line 16.
@@ -1291,7 +1304,7 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[11]) (./tex/ejemplosDeSolucion.tex (./code/ejemplos.txt
+[12]) (./tex/ejemplosDeSolucion.tex (./code/ejemplos.txt
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
 Package pdftex.def Info: logo.pdf  used on input line 59.
@@ -1304,7 +1317,7 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[12]
+[13]
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
 Package pdftex.def Info: logo.pdf  used on input line 129.
@@ -1317,7 +1330,7 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[13]
+[14]
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
 Package pdftex.def Info: logo.pdf  used on input line 195.
@@ -1330,7 +1343,7 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[14])) (./tex/aproximacion.tex (./code/aproximacion.py
+[15])) (./tex/aproximacion.tex (./code/aproximacion.py
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
 Package pdftex.def Info: logo.pdf  used on input line 42.
@@ -1343,7 +1356,7 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[15])
+[16])
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -1358,8 +1371,8 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[16]) (./tex/medicionEmpirica.tex
-<images/cuadradosMinimos.png, id=748, 511.9125pt x 415.5525pt>
+[17]) (./tex/medicionEmpirica.tex
+<images/cuadradosMinimos.png, id=753, 511.9125pt x 415.5525pt>
 File: images/cuadradosMinimos.png Graphic file (type png)
 <use images/cuadradosMinimos.png>
 Package pdftex.def Info: images/cuadradosMinimos.png  used on input line 8.
@@ -1376,12 +1389,12 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[17pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
+[18pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.16 \begin{center}
                     <./images/cuadradosMinimos.png>]
-<images/image.png, id=758, 511.9125pt x 415.5525pt>
+<images/image.png, id=763, 511.9125pt x 415.5525pt>
 File: images/image.png Graphic file (type png)
 <use images/image.png>
 Package pdftex.def Info: images/image.png  used on input line 17.
@@ -1399,7 +1412,7 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[18 <./images/image.png>] 
+[19 <./images/image.png>] 
 AED: lastpage setting LastPage
 (./main.aux
 LaTeX Info: Redefining \sptext on input line 26.
@@ -1413,18 +1426,18 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 37013 strings out of 478287
- 690744 string characters out of 5849289
+ 37015 strings out of 478287
+ 690762 string characters out of 5849289
  3217695 words of memory out of 5000000
  53976 multiletter control sequences out of 15000+600000
  475566 words of font info for 52 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  103i,16n,105p,770b,2130s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on main.pdf (18 pages, 312225 bytes).
+Output written on main.pdf (19 pages, 316681 bytes).
 PDF statistics:
- 945 PDF objects out of 1000 (max. 8388607)
- 882 compressed objects within 9 object streams
- 603 named destinations out of 1000 (max. 500000)
+ 951 PDF objects out of 1000 (max. 8388607)
+ 887 compressed objects within 9 object streams
+ 605 named destinations out of 1000 (max. 500000)
  156 words of extra memory for PDF output out of 10000 (max. 10000000)
 
