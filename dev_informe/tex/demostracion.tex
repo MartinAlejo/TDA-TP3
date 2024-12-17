@@ -1,127 +1,249 @@
 \section{Demostración: NP-Completo}
 
-Vamos a demostrar que la batalla naval es $NP$ completo. Pero, ¿Como se demuestra que un algortimo es $NP$ completo? Tiene que cumplir dos condiciones: 
+
+\subsection*{Reducción desde el problema 3-Partition en su version unaria}
+
+Vamos a demostrar que la batalla naval es $NP$-Completo. Pero, ¿Como se demuestra que un problema es $NP$-Completo? Tiene que cumplir dos condiciones: 
 
 \begin{itemize}
     \item \textbf{Pertenencia a NP:} La verificación de una solución candidata es posible en tiempo polinomial.
     \item \textbf{NP-dificultad:} Se puede realizar una reducción polinomial desde cualquier problema NP-completo hacia este problema.
 \end{itemize}
 
-En la sección anterior pudimos verificar con éxito que nuestro problema es de tipo NP, ahora hay que demostrar que se puede realizar una reducción polinomial desde cualquier problema NP-Completo. Recordemos que todos los problemas NP-Completos pueden reducirse a cualquier problema NP-Completo. 
+Ya en la sección anterior pudimos verificar con éxito que nuestro problema es un problema NP, ahora hay que demostrar que se puede realizar una reducción polinomial desde cualquier problema NP-Completo. Recordemos que todos los NP completos pueden ser reducidos despues cualquier problema NP completo. 
 
-En nuestro caso, utilizaremos el problema de \textit{2-Partition}, que como fue demostrado anteriormente en clase, es un problema NP-Completo, para verificar que el problema de la batalla naval pertenece a NP-Completo. Es decir, se puede realizar la reduccion polinomial: \textbf{2-Partition} $\leq_p$ \textbf{PBN}
-\vskip0.5cm
+En nuestro caso, utilizaremos el problema de \textit{3-Partition}, que como demostraremos más abajo, es un problema NP-Completo, para verificar que el problema de la batalla naval pertenece a NP-Completo. Es decir, se puede realizar la reduccion polinomial: \textbf{3-Partition} $\leq_p$ \textbf{PBN}.
+
+Definamos un poco cómo se compone el problema \textit{3-Partition}.
+
+\textbf{Nota}: Por simplificacion, siempre que hablemos de 3-Partition, nos estamos refiriendo a la version unaria del problema.
+
+\subsubsection*{Definición del problema 3-Partition}
+
+Dado un conjunto de enteros positivos \(S = \{a_1, a_2, \dots, a_{n}\}\), donde cada número está representado en notación unaria, decide si el conjunto puede partirse en 3 subconjuntos disjuntos \(S_1, S_2, S_3\), tal que la suma de cada subconjunto sea la misma. Es decir:
+
+\begin{itemize}
+    \item La suma de los elementos de cada subconjunto \(S_i\) = m
+    \item sum(S) = \(sum(S_1) + sum(S_2) + sum(S_3)\) = 3m
+\end{itemize}
+
+Veamos un ejemplo: 
+
+$S = \{1, 111, 11, 1, 1, 1\}$
+
+\textbf{Nota}: Es la representacion unaria de $S = \{1, 3, 2, 1, 1, 1\}$
+
+Una solución a esta instancia del problema de 3-Partition es la siguiente:
+
+$S_1 = \{111\}$, $S_2 = \{11, 1\}$, $S_3 = \{1, 1, 1\}$
+
+Vemos que es solución, ya que se cumple que la suma de los elementos en cada subconjunto $S_i = 3$. %Y los subconjuntos S_i son disjuntos.%
+
+\section*{Reducción de 2-Partition a 3-Partition}
+
 \subsection*{Definiciones}
 
-\textbf{2-Partition}: Se tiene un conjunto $S$ de enteros positivos, y dos subconjuntos $S_1$ y $S_2$, tales que se cumple:
+\textbf{2-Partition:} El problema consiste en dividir un conjunto de números \( A = \{a_1, a_2, \dots, a_n\} \) en dos subconjuntos disjuntos \( S_1 \) y \( S_2 \) tales que la suma de los elementos de ambos subconjuntos sea igual.
+
+\textbf{3-Partition:} El problema consiste en dividir un conjunto de números (en representacion unaria) \( B = \{b_1, b_2, \dots, b_n\} \) en tres subconjuntos disjuntos \( S_1, S_2, S_3 \), tales que la suma de los elementos en cada subconjunto sea la misma.
+
+\subsection*{Pertenencia a NP}
+
+Primero hay que demostrar que 3-Partition pertenece a NP, para ello, debemos poder encontrar un validador que valide una solución al problema de 3-Partition en tiempo polinomial. Dicho validador es el siguiente:
+
+Dado \( S = \{a_1, a_2, \dots, a_n\} \), y tres subconjuntos $S_1$, $S_2$, y $S_3$, se valida que:
+
 \begin{itemize}
-    \item Los subconjuntos son disjuntos
-    \item La unión de los subconjuntos es el conjunto original
-    \item $\text{sum}(S_1) + \text{sum}(S_2) = \text{sum}(S)$
-    \item $\text{sum}(S_1) = \text{sum}(S_2)$
+    \item $S$, $S_1$, $S_2$, $S_3$ estan en representacion unaria (lo estan si su representacion consiste en $a_i$ veces el numero 1)
+    \item $sum(S_1)$ = $sum(S_2)$ = $sum(S_3)$
+    \item $S_1$ $\cup$ $S_2$ $\cup$ $S_3$ = $S$
+    \item $S_1$ $\cap$ $S_2$ $\cap$ $S_3$ = $\emptyset$
 \end{itemize}
 
-\textbf{Ejemplo}:
+Verificar la representación unaria, comprobar que los subconjuntos son disjuntos, calcular la suma de los elementos de cada subconjunto y verificar que las sumas son iguales, se pueden realizar en tiempo polinomial, puesto que para realizar todas estas operaciones, habría que recorrer elemento por elemento cada subconjunto.
 
-$S =\{3, 3, 4, 4\},\quad S_1 = \{3, 4\},\quad S_2 = \{3, 4\} \quad \rightarrow \quad \text{sum}(S)= 14 = \text{sum}(S_1) + \text{sum}(S_2) = 7 + 7$
+\subsection*{Reducción}
 
-\vskip0.5cm
-\textbf{Problema de la Batalla Naval}: Dado un tablero de $n \times m$, una lista de $k$ barcos (donde el barco $i$ tiene longitud $b_i$), una lista de restricciones para filas (demandas de casilleros ocupados en cada fila) y otra para columnas, determinar si existe una forma válida de ubicar los barcos en el tablero cumpliendo las restricciones, sin que los barcos sean adyacentes.
+Para reducir polinomialmente una instancia de \textbf{2-Partition} a una instancia de \textbf{3-Partition}, hacemos lo siguiente:
 
-\subsection*{Planteo del problema}
+Consideramos el conjunto \( S = \{a_1, a_2, \dots, a_n\} \) tal que $sum(S) = 2m$. Donde $m = sum(S_1) = sum(S_2)$.
 
-Vamos a utilizar el conjunto visto anteriormente ($S = \{3,3,4,4\}$), o sea una instancia del problema de 2-Partition, la cual resolveremos utilizando el problema de la batalla naval.
+Lo que debemos hacer, es calcular m, y agregarlo al conjunto S. Luego, realizamos la representacion unaria de los elementos de S, y resolvemos el problema usando la caja negra de 3-Partition. Si hay solución para 3-Partion, hay solución para 2-Partition.
 
-Para ello, debemos crear un tablero de dimensiones $i \times j$, donde $i$ son la cantidad de filas, y $j$ la cantidad de columnas.
+Veamoslo con un ejemplo:
 
-\textbf{Dimensiones del tablero:}
+$S = \{3, 4, 3, 4\}$. Una solución al problema de 2-Partition es la siguiente: $S_1 = \{3, 4\}$, $S_2 = \{3, 4\}$. Pero vamos a resolverlo usando 3-Partition de la forma que mencionamos arriba, es decir, vamos a transformar esta instancia a una que pueda resolverse con 3-Partition.
+
+Vemos que $m = sum(S)$ $/$ $2 = (3 + 4 + 3 + 4)$ $/$ $2 = 7$, entonces al agregar a $m$ al conjunto $S$ y representar todo de forma unaria, tenemos $S = \{111, 1111, 111, 1111, 1111111\}$. Y usando la caja negra de 3-Partition, vemos que hay solución. De hecho, es la siguiente:
+
+$S_1 = \{111, 1111\}$, $S_2 = \{111, 1111\}$, $S_3 = \{1111111\}$.
+
+\textbf{Nota}: Siempre vamos a encontrar que un tercer subconjunto va a ser exactamente m, y por lo tanto, sumar exactamente m tambien (que es lo que por supuesto, suman los otros 2 subconjuntos).
+
+Si pudimos encontrar estos 3 subconjuntos, implica que hay solución para 2-Partition, ya que ahora en 3-Partition $sum(S) = 3m = 2m + m$, y esto solo sucede si $sum(S_1) = sum(S_2) = sum(S_3) = m$, que significa que en la instancia original de 2-Partition existe solución tal que $sum(S) = 2m$, siendo $sum(S_1) = m$, $sum(S_2) = m$.
+
+Dado que encontrar m, agregar m al conjunto S y representar a los elementos de S en forma unaria, pueden hacerse en tiempo polinomial. Entonces pudimos hacer la reduccion \textbf{2-Partition} $\leq_p$ \textbf{3-Partition}. Quedando demostrado que 3-Partition pertenece a NP-Completo.
+
+\subsection*{Reducción de 3-Partition a La Batalla Naval}
+
+Dado una instancia del problema \textit{3-Partition}, construiremos una instancia del problema \textit{La Batalla Naval}.
+
+\paragraph{Construcción del tablero:}
+
 \begin{itemize}
-    \item Cantidad de filas ($i$) = $sum(S) + n - 1  = (T + 4 - 1 ) = 17$
-    \item Cantidad de columnas ($j$) = $2$ 
-\end{itemize}
-\vskip0.5cm
-
-\textbf{Nota}: Siendo $n$ la cantidad de elementos del conjunto $S$, y $T = \sum_{i=1}^{n} a_i \quad \text{con} \quad a_i \in S$
-
-\vskip0.25cm
-
-\textbf{Nota}: La cantidad de columnas proviene de la cantidad de subconjuntos (2).
-
-\vskip0.5cm
-
-\textbf{Modelo del problema}:
-
-\begin{itemize}
-    \item \textbf{Lista de barcos:} Cada elemento $a_i \in S$ corresponde a un barco de longitud $a_i$. Para nuestro ejemplo, los barcos serían de longitudes $3, 3, 4, 4$.
-
-    \item \textbf{Restricciones de las columnas:}
-    Cada columna debe contener exactamente $T / 2$ casilleros ocupados. 
+    \item \textbf{Dimensiones del tablero:}
+    \begin{itemize}
+        \item Cantidad de filas: 5. Cada subconjunto \(S_i\) ocupa una fila, y se agrega una fila vacía después de cada subconjunto (excepto después del último).
+        \item Cantidad de columnas: $sum(S)$ = \(3m\).
+    \end{itemize}
 
     \item \textbf{Restricciones de las filas:}
-    Cada fila puede contener como máximo un casillero ocupado. Al tener $n - 1$ filas adicionales, nos aseguramos que los barcos no sean adyacentes entre sí. Ya que tras colocar un barco dejamos una fila vacía.
+    \begin{itemize}
+        \item Las filas que contienen subconjuntos tienen una restricción igual a $m$.
+        \item Las filas vacías (entre subconjuntos) tienen una restricción igual a 0.
+    \end{itemize}
+
+    \item \textbf{Restricciones de las columnas:} Las restricciones de las columnas van a ser 1 para todas. Ya que en cada columna va a haber exactamente una parte de un barco.
+
+    \item \textbf{Barcos:} Los barcos van a ser los elementos $a_i$ que pertenecen al conjunto S.
 \end{itemize}
 
-\vskip0.25cm
+\section*{Ejemplos}
 
-Ejemplo del tablero: 
+A continuación desarrollaremos 2 ejemplos para visualizar la relación entre 3-Partition y la Batalla Naval:
 
-\begin{center}
+\textbf{Instancia del problema de 3-Partition:}
 \[
-    \begin{bmatrix}
-    1 & \text{-} \\
-    1 & \text{-} \\
-    1 & \text{-} \\
-    \text{-} & \text{-} \\
-    \text{-} & 2 \\
-    \text{-} & 2 \\
-    \text{-} & 2 \\
-    \text{-} & \text{-} \\
-    3 & \text{-} \\
-    3 & \text{-} \\
-    3 & \text{-} \\
-    3 & \text{-} \\
-    \text{-} & \text{-} \\
-    \text{-} & 4 \\
-    \text{-} & 4 \\
-    \text{-} & 4 \\
-    \text{-} & 4
-    \end{bmatrix}
+S = \{1, 111, 11, 1, 1, 1\}
 \]
-\end{center}
 
-Los barcos pertenecientes a la primer columna = $S_{1} = {a_{1}, a_{2},...,a_{q}} = \{3, 4\}$ 
-\vskip0.25cm
-Los barcos pertenecientes a la segunda columna = $S_{2} = {a_{q +1}, a_{q + 2},..., a_{n}} = \{3, 4\}$
-\vskip0.5cm
-\subsection*{Demostración de la Reducción}
+\textbf{Pasamos a no unario:}
+\[
+S = \{1, 3, 2, 1, 1, 1\}
+\]
 
-\paragraph{ Si existe una solución para 2-Partition:}
-  
-Sea $S_1$ y $S_2$ la partición de $S$ tal que $\text{sum}(S_1) = \text{sum}(S_2) = T / 2$.  
+\textbf{Calculamos la suma total y hallamos m:}
+\[
+\text{sum}(S) = 9 = 3m \rightarrow m = 3
+\]
 
-En el problema de la Batalla Naval:
+\textbf{Lo transformamos a un problema de batalla naval:}
 
+\[
+\text{Filas} = [3, 0, 3, 0, 3]
+\]
+\[
+\text{Columnas} = [1, 1, 1, 1, 1, 1, 1, 1, 1]
+\]
+\[
+\text{Barcos} = [1, 3, 2, 1, 1, 1]
+\]
+
+\textbf{Usamos la caja negra de la batalla naval. Veamos una posible solución:}
+\[
+\begin{array}{ccccccccc}
+1 & 1 & 1 & - & - & - & - & - & - \\
+- & - & - & - & - & - & - & - & - \\
+- & - & - & 1 & - & - & 1 & - & 1 \\
+- & - & - & - & - & - & - & - & - \\
+- & - & - & - & 1 & 1 & - & 1 & - \\
+\end{array}
+\]
+
+Vemos que se cumplen las restricciones de las filas, ya que la primer, tercera y quinta fila tienen 3 de demanda cumplida en cada una.
+También se cumplen las restricciones de las columnas, pues en cada una de ellas se coloca exactamente una parte de un barco.
+Además vemos que se están colocando todos los barcos (los 6 barcos), respetando las restricciones de adyacencia.
+Por lo tanto, dada esta configuración de demandas de filas, columnas y longitudes de barcos, vemos que existe una solución al problema de la batalla naval.
+
+\subsection{Veamos otro ejemplo:}
+
+\textbf{Instancia del problema de 3-Partition:}
+\[
+S = \{111111, 11111, 1111, 11111, 111, 1111111\}
+\]
+
+\textbf{Pasamos a no unario:}
+\[
+S = \{6, 5, 4, 5, 3, 7\}
+\]
+
+\textbf{Calculamos la suma total y hallamos m:}
+\[
+\text{sum}(S) = 30 = 3m \rightarrow m = 10
+\]
+
+\textbf{Nota:} Solución válida de 3-partition:
+\[
+    \{1111111, 111\}, \{111111, 1111\}, \{11111, 11111\}
+\]
+
+\textbf{Lo transformamos a un problema de la batalla naval:}
+
+\[
+\text{Filas} = [10, 0, 10, 0, 10]
+\]
+\[
+\text{Columnas} = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+\]
+\[
+\text{Barcos} = [6, 5, 4, 5, 3, 7]
+\]
+
+\textbf{Usamos la caja negra de la batalla naval. Veamos una posible solución:}
+\[
+\scriptsize
+\begin{array}{cccccccccccccccccccccccccccccc}
+1 & 1 & 1 & 1 & 1 & 1 & 1 & - & - & - & - & - & - & - & - & - & - & - & 1 & 1 & 1 & - & - & - & - & - & - & - & - & - \\
+- & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\
+- & - & - & - & - & - & - & 1 & 1 & 1 & 1 & 1 & 1 & - & - & - & - & - & - & - & - & 1 & 1 & 1 & 1 & - & - & - & - & - \\
+- & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - & - \\
+- & - & - & - & - & - & - & - & - & - & - & - & - & 1 & 1 & 1 & 1 & 1 & - & - & - & - & - & - & - & 1 & 1 & 1 & 1 & 1 \\
+\end{array}
+\]
+
+Al igual que en el ejemplo anterior, vemos que se cumplen las restricciones de las filas, pues la primer, tercera y quinta fila tienen 10 de demanda cumplida cada una.
+También se cumplen las restricciones de las columnas, pues en cada columna se coloca exactamente una parte de un barco.
+Además vemos que se estan colocando todos los barcos (los 6 barcos), respetando las restricciones de adyacencia.
+Por lo tanto, dada esta configuración de demandas de filas, columnas y longitudes de barcos, vemos que existe una solución al problema de la batalla naval.
+
+\paragraph{Relación con 3-Partition:}
 \begin{itemize}
-    \item Colocamos los barcos pertenecientes a los elementos de $S_1$ en la primera columna.
-    \item Colocamos los barcos pertenecientes a los elementos de $S_2$ en la segunda columna.
-    \item Aseguramos que entre dos barcos haya al menos una fila vacía, cumpliendo la condición de no adyacencia.
+    \item Cada subconjunto \(S_i\) corresponde a una fila del tablero. 
+    \item Los elementos de cada subconjunto \(S_i\) son equivalentes a los barcos en la batalla naval, ocupando exactamente \(m\) celdas en esa fila.
+    \item Si se puede resolver el problema de la batalla naval, tras configurar el tablero cumpliendo todas las restricciones mencionadas anteriormente, entonces existe una solución para el problema de \(3\)-Partition.
 \end{itemize}
 
-Como cada columna tiene exactamente $T / 2$ casilleros ocupados y los barcos están distribuidos sin ser adyacentes, la instancia del problema de la Batalla Naval tiene una solución válida.
+\subsection{Hay 3-Partition $\rightarrow$ hay PBN:}
 
-\paragraph{Si existe una solución para el problema de la Batalla Naval:}
+Supongamos que hay solución en 3-Partition, es decir, dado un conjunto $S$ en representación unaria, pudimos
+encontrar $S_1$, $S_2$, $S_3$ subconjuntos disjuntos de $S$ tal que $sum(S1)$ = $sum(S2)$ = $sum(S3)$ = $m$.
 
-
-Sea una distribución válida de los barcos en el tablero.  
+Resulta entonces: 
 
 \begin{itemize}
-    \item Los barcos en la primera columna representan un subconjunto $S_1$ de $S$, y los barcos en la segunda columna representan otro subconjunto $S_2$.
-    \item Como cada columna tiene exactamente $T / 2$ casilleros ocupados, tenemos que $\text{sum}(S_1) = \text{sum}(S_2) = T / 2$.
-    \item $S_1$ y $S_2$ al ser disjuntos, la unión de estos da como resultado el conjunto $S$, resolviendo la instancia de 2-Partition.
+    \item Los elementos de cada subconjunto $S_i$ van a estar en una fila de la matriz en la solución de nuestro problema de la batalla naval.
+    \item Los barcos van a ser representados por los elementos de $S_i$, tal que su longitud van a ser igual al valor de dicho elemento.
+    \item La cantidad de filas van a ser 5. Para respetar las restricciones sobre la adyacencia, hay que colocar una fila vacía tras colocar cada una de las filas que representan los subconjuntos, salvo la última. Luego la demanda de las filas que representan los subconjuntos va a ser igual a $m$, y las filas vacías van a tener de demanda 0.
+    \item La cantidad de columnas van a ser $sum(S)$, y van a tener todas restricción 1, para asegurarnos de que en una misma columna solo se va a colocar una parte de un barco.
 \end{itemize}
+Como pudimos encontrar 3 subconjuntos del conjunto $S$ que cumplen con las características del problema 3-Partition, resulta que, siempre vamos a poder encontrar una configuración válida para la batalla naval, en la cual cada subconjunto $S_i$ representa una fila y $sum(S)$ representa la cantidad de columnas. Además, la demanda cumplida en cada fila con demanda mayor a 0 es igual a $m$, y la demanda cumplida en cada columna es igual a 1.
+    
+\subsection{Hay PBN $\rightarrow$ hay 3-Partition:}
+
+\begin{itemize}
+    \item Tendremos una configuración en donde la tabla se compone de 5 filas, las cuales 3 tienen demanda mayor a 0 y 2 con demanda igual a 0, y $sum(S)$ columnas con demanda igual 1.
+    \item Al colocar los barcos en dichas filas, resulta que estas se mapean a un subconjunto del problema de 3-Partition: Al tener 3 filas con demanda mayor a 0, tendremos 3 subconjuntos.
+    \item La demanda cumplida es igual en todas las filas cuya demanda es mayor a 0.
+\end{itemize}
+Como pudimos encontrar una disposición de barcos que cumplan con la demanda pedida, resulta que hay solución en 3-Partition tal que cada fila no vacía va a ser un subconjunto, y los barcos colocados en dicha fila, van a ser los elementos que pertenecen al subconjunto en cuestión.
 
 \subsection*{Conclusión}
 
-La reducción transforma una instancia de 2-Partition en una instancia del problema de la Batalla Naval en tiempo polinomial, ya que la construcción del tablero y las restricciones toma tiempo proporcional a $n$, el tamaño del conjunto $S$.
+\begin{itemize}
+    \item \textit{La Batalla Naval} pertenece a NP.
+    \item Reducimos un problema NP-completo (\textit{3-Partition}) a \textit{La Batalla Naval} en tiempo polinomial.
+    \item Si existe una solución para el problema \textit{3-Partition}, entonces podemos construir una configuración válida del tablero para \textit{La Batalla Naval}.
+    \item Si existe una configuración válida para \textit{La Batalla Naval}, entonces podemos construir una partición válida para el problema \textit{3-Partition}.
+\end{itemize}
 
-Por lo tanto, hemos desmotrado que es posible realizar la reducción polinomial: 2-Partition $\leq_p$ PBN.
+Por lo tanto, \textit{La Batalla Naval} es NP-completo.

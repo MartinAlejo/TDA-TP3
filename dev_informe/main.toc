@@ -5,15 +5,18 @@
 \contentsline {subsection}{\numberline {1.3}Que se coloquen todos los barcos}{4}{subsection.1.3}%
 \contentsline {subsection}{\numberline {1.4}Codigo}{5}{subsection.1.4}%
 \contentsline {subsection}{\numberline {1.5}Conclusion}{5}{subsection.1.5}%
-\contentsline {section}{\numberline {2}Demostración: NP-Completo}{5}{section.2}%
-\contentsline {paragraph}{ Si existe una solución para 2-Partition:}{7}{section*.7}%
-\contentsline {paragraph}{Si existe una solución para el problema de la Batalla Naval:}{7}{section*.8}%
-\contentsline {section}{\numberline {3}Algoritmo de Backtracking}{8}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Codigo}{8}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Análisis}{11}{subsection.3.2}%
-\contentsline {section}{\numberline {4}Ejemplos de ejecución}{11}{section.4}%
-\contentsline {section}{\numberline {5}Algoritmo de aproximación}{14}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Descripción del algoritmo}{14}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Análisis del algoritmo}{16}{subsection.5.2}%
-\contentsline {section}{\numberline {6}Medición empírica}{16}{section.6}%
-\contentsline {section}{\numberline {7}Conclusiones}{17}{section.7}%
+\contentsline {section}{\numberline {2}Demostración: NP-Completo}{6}{section.2}%
+\contentsline {paragraph}{Construcción del tablero:}{8}{section*.11}%
+\contentsline {subsection}{\numberline {2.1}Veamos otro ejemplo:}{9}{subsection.2.1}%
+\contentsline {paragraph}{Relación con 3-Partition:}{9}{section*.13}%
+\contentsline {subsection}{\numberline {2.2}Hay 3-Partition $\rightarrow $ hay PBN:}{9}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Hay PBN $\rightarrow $ hay 3-Partition:}{10}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Algoritmo de Backtracking}{10}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Codigo}{10}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Análisis}{13}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Ejemplos de ejecución}{14}{section.4}%
+\contentsline {section}{\numberline {5}Algoritmo de aproximación}{17}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Descripción del algoritmo}{17}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Análisis del algoritmo}{18}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Medición empírica}{19}{section.6}%
+\contentsline {section}{\numberline {7}Conclusiones}{20}{section.7}%
