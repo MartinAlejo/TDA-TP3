@@ -82,23 +82,19 @@ $S_1 = \{111, 1111\}$, $S_2 = \{111, 1111\}$, $S_3 = \{1111111\}$.
 
 Si pudimos encontrar estos 3 subconjuntos, implica que hay solución para 2-Partition, ya que ahora en 3-Partition $sum(S) = 3m = 2m + m$, y esto solo sucede si $sum(S_1) = sum(S_2) = sum(S_3) = m$, que significa que en la instancia original de 2-Partition existe solución tal que $sum(S) = 2m$, siendo $sum(S_1) = m$, $sum(S_2) = m$.
 
-% FALTA DEMOSTRAR CORRECTAMENTE QUE ESTO ES COMPLEJIDAD POLINOMIAL %
 Dado que encontrar m, agregar m al conjunto S y representar a los elementos de S en forma unaria, pueden hacerse en tiempo polinomial. Entonces pudimos hacer la reduccion \textbf{2-Partition} $\leq_p$ \textbf{3-Partition}. Quedando demostrado que 3-Partition pertenece a NP-Completo.
 
-% DE ACA PARA ABAJO LA MAYOR PARTE ESTA MAL (HAY QUE REHACER VARIAS COSAS USANDO LA VERSION UNARIA DE LA VARIACION DEL 3-PARTITION)
-
 \subsection*{Reducción de 3-Partition a La Batalla Naval}
-
 
 Dado una instancia del problema \textit{3-Partition}, construiremos una instancia del problema \textit{La Batalla Naval}.
 
 \paragraph{Construcción del tablero:}
 
 \begin{itemize}
-    \item \textbf{Dimensiones del tablero:} % IMPORTANTE: Quiza invirtiendo la logica entre filas/columnas sea mas facil o igual %
+    \item \textbf{Dimensiones del tablero:}
     \begin{itemize}
         \item Cantidad de filas: 5. Cada subconjunto \(S_i\) ocupa una fila, y se agrega una fila vacía después de cada subconjunto (excepto después del último).
-        \item Cantidad de columnas: $sum(S)$ = \(3m\). % NO ESTOY SEGURO %
+        \item Cantidad de columnas: $sum(S)$ = \(3m\).
     \end{itemize}
 
     \item \textbf{Restricciones de las filas:}
@@ -111,9 +107,6 @@ Dado una instancia del problema \textit{3-Partition}, construiremos una instanci
 
     \item \textbf{Barcos:} Los barcos van a ser los elementos $a_i$ que pertenecen al conjunto S.
 \end{itemize}
-
-% ME QUEDE ACA
-
 
 \section*{Ejemplos}
 
@@ -161,8 +154,6 @@ Vemos que se cumplen las restricciones de las filas, ya que la primer, tercera y
 También se cumplen las restricciones de las columnas, pues en cada una de ellas se coloca exactamente una parte de un barco.
 Además vemos que se están colocando todos los barcos (los 6 barcos), respetando las restricciones de adyacencia.
 Por lo tanto, dada esta configuración de demandas de filas, columnas y longitudes de barcos, vemos que existe una solución al problema de la batalla naval.
-
-% \noindent\rule{\textwidth}{0.5pt}
 
 \subsection{Veamos otro ejemplo:}
 

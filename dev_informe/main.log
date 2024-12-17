@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.14)  16 DEC 2024 23:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.14)  16 DEC 2024 23:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1229,7 +1229,7 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 [6]
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
-Package pdftex.def Info: logo.pdf  used on input line 98.
+Package pdftex.def Info: logo.pdf  used on input line 94.
 (pdftex.def)             Requested size: 71.13188pt x 25.89293pt.
 
 
@@ -1242,7 +1242,7 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 [7]
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
-Package pdftex.def Info: logo.pdf  used on input line 177.
+Package pdftex.def Info: logo.pdf  used on input line 168.
 (pdftex.def)             Requested size: 71.13188pt x 25.89293pt.
 
 
@@ -1254,28 +1254,28 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 
 [8]
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 203.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 194.
 
 
-Overfull \hbox (60.7091pt too wide) detected at line 211
+Overfull \hbox (60.7091pt too wide) detected at line 202
 []
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 225.
+(hyperref)                removing `math shift' on input line 216.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\rightarrow' on input line 225.
+(hyperref)                removing `\rightarrow' on input line 216.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 225.
+(hyperref)                removing `math shift' on input line 216.
 
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
-Package pdftex.def Info: logo.pdf  used on input line 236.
+Package pdftex.def Info: logo.pdf  used on input line 227.
 (pdftex.def)             Requested size: 71.13188pt x 25.89293pt.
 
 Package fancyhdr Warning: \headheight is too small (27.0pt): 
@@ -1287,15 +1287,15 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 [9]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 240.
+(hyperref)                removing `math shift' on input line 231.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\rightarrow' on input line 240.
+(hyperref)                removing `\rightarrow' on input line 231.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 240.
+(hyperref)                removing `math shift' on input line 231.
 
 ) (./tex/complejidad.tex (./code/backtracking.py
 File: logo.pdf Graphic file (type pdf)
