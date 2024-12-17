@@ -16,4 +16,10 @@ El informe del trabajo se encuentra [acá](./Informe.pdf).
 
 Para correr el programa, se debe ejecutar el siguiente comando sobre el directorio raíz:
 
-```python3 main.py```
+```python3 main.py <path>```
+
+Donde **path** es la ruta a un archivo, que sigue el formato de los inputs presentados por la catedra (sin los comentarios).
+
+***Ejemplo***: ```python3 main.py ./inputs/3_3_2.txt```
+
+O ejecutar ```python3 main.py all``` para correr todos los ejemplos.

@@ -1,10 +1,10 @@
 # Fdb version 3
-["biber main"] 1734394946 "main.bcf" "main.bbl" "main" 1734401815
-  "main.bcf" 1734401815 106594 d0a4d0e1c136c0a864bb82402f3a8ea5 "pdflatex"
+["biber main"] 1734394946 "main.bcf" "main.bbl" "main" 1734402627
+  "main.bcf" 1734402626 106594 d0a4d0e1c136c0a864bb82402f3a8ea5 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1734401813 "/home/martin/TDA/TP3/dev_informe/main.tex" "main.pdf" "main" 1734401815
+["pdflatex"] 1734402625 "/home/martin/TDA/TP3/dev_informe/main.tex" "main.pdf" "main" 1734402627
   "/etc/texmf/web2c/texmf.cnf" 1726336337 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/martin/TDA/TP3/dev_informe/main.tex" 1734394731 2638 3fbbd0fb07b60c3c05997488fefff3e0 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -249,19 +249,19 @@
   "images/cuadradosMinimos.png" 1733979893 28996 51a77fc56cb20df94c061358f1b47fd9 ""
   "images/image.png" 1733979932 35839 d78d909a4e72189d4f654648c4a5d2dc ""
   "logo.pdf" 1731789608 23517 55dcbdbcb3a7201e9413943da9c8afa3 ""
-  "main.atfi" 1734401815 23 33e109ecf84d2ac55814cb2442ea01dc "pdflatex"
-  "main.aux" 1734401815 4442 63920e03d83652d4a5e97c87b784307b "pdflatex"
+  "main.atfi" 1734402626 23 33e109ecf84d2ac55814cb2442ea01dc "pdflatex"
+  "main.aux" 1734402626 4442 63920e03d83652d4a5e97c87b784307b "pdflatex"
   "main.bbl" 1734394947 0 d41d8cd98f00b204e9800998ecf8427e "biber main"
-  "main.out" 1734401815 3262 24110c8ed0d8b5c1b7c122eaba624893 "pdflatex"
-  "main.run.xml" 1734401815 2274 3c9efbcb7467da793e6933a55675e6bc "pdflatex"
+  "main.out" 1734402626 3262 24110c8ed0d8b5c1b7c122eaba624893 "pdflatex"
+  "main.run.xml" 1734402626 2274 3c9efbcb7467da793e6933a55675e6bc "pdflatex"
   "main.tex" 1734394731 2638 3fbbd0fb07b60c3c05997488fefff3e0 ""
-  "main.toc" 1734401815 1824 afb16da5de916ea7ff03f9ec5759fa93 "pdflatex"
+  "main.toc" 1734402626 1824 afb16da5de916ea7ff03f9ec5759fa93 "pdflatex"
   "tex/algoritmos.tex" 1733985254 2697 17edd4c3dec20f2229a2c21ce3c46f8c ""
   "tex/aproximacion.tex" 1733985333 2388 0191883afbc57fd464f1248d0bf089ea ""
   "tex/complejidad.tex" 1734026698 1214 0e449ef4c1d5c5d0c81db015c7e15259 ""
   "tex/conclusiones.tex" 1734277975 865 905a7d2335ed9970150e4face863891c ""
   "tex/consigna.tex" 1733981657 4078 27bd25e1920e89b559b383ca44ae789e ""
-  "tex/demostracion.tex" 1734401813 14188 9cf89e899e0a1439fa20254372b5d3f2 ""
+  "tex/demostracion.tex" 1734402624 14241 e42b885daf66d17979e71b46a5c9628d ""
   "tex/ejemplosDeSolucion.tex" 1733985510 164 e2b8f927d3ef772d0d602abb87bc0552 ""
   "tex/medicionEmpirica.tex" 1733985583 1097 dc50bb721cf9d4a0ea4b9229b1f324ea ""
   (generated)

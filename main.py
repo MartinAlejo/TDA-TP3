@@ -1,3 +1,5 @@
+import sys
+
 def print_grid(grid, demmand_rows, demmand_cols):
     print("Demmand rows: ", demmand_rows)
     print("Demmand cols: ", demmand_cols)
@@ -225,7 +227,7 @@ def run_example(file):
     rows, cols, ships = parse_input("inputs/" + file)
     ship_placement(rows, cols, ships)
 
-def main():
+def run_examples():
     run_example('3_3_2.txt')
     run_example('5_5_6.txt')
     run_example('8_7_10.txt')
@@ -235,7 +237,15 @@ def main():
     run_example('15_10_15.txt')
     run_example('20_20_20.txt')
     run_example('20_25_30.txt') 
-    run_example('30_25_25.txt') # Tarda mucho
+    run_example('30_25_25.txt')
 
-if __name__ == '__main__':
-    main()
+def main(path):
+    rows, cols, ships = parse_input(path)
+    ship_placement(rows, cols, ships)
+
+if __name__ == "__main__":
+    path = sys.argv[1]
+    if path == 'all':
+        run_examples()
+    else:    
+        main(path)
