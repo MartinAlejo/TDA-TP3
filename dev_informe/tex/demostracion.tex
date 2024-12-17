@@ -157,7 +157,12 @@ S = \{1, 3, 2, 1, 1, 1\}
 \end{array}
 \]
 
-\noindent\rule{\textwidth}{0.5pt}
+Vemos que se cumplen las restricciones de las filas, ya que la primer, tercera y quinta fila tienen 3 de demanda cumplida en cada una.
+También se cumplen las restricciones de las columnas, pues en cada una de ellas se coloca exactamente una parte de un barco.
+Además vemos que se están colocando todos los barcos (los 6 barcos), respetando las restricciones de adyacencia.
+Por lo tanto, dada esta configuración de demandas de filas, columnas y longitudes de barcos, vemos que existe una solución al problema de la batalla naval.
+
+% \noindent\rule{\textwidth}{0.5pt}
 
 \subsection{Veamos otro ejemplo:}
 
@@ -205,6 +210,11 @@ S = \{6, 5, 4, 5, 3, 7\}
 \end{array}
 \]
 
+Al igual que en el ejemplo anterior, vemos que se cumplen las restricciones de las filas, pues la primer, tercera y quinta fila tienen 10 de demanda cumplida cada una.
+También se cumplen las restricciones de las columnas, pues en cada columna se coloca exactamente una parte de un barco.
+Además vemos que se estan colocando todos los barcos (los 6 barcos), respetando las restricciones de adyacencia.
+Por lo tanto, dada esta configuración de demandas de filas, columnas y longitudes de barcos, vemos que existe una solución al problema de la batalla naval.
+
 \paragraph{Relación con 3-Partition:}
 \begin{itemize}
     \item Cada subconjunto \(S_i\) corresponde a una fila del tablero. 
@@ -214,26 +224,27 @@ S = \{6, 5, 4, 5, 3, 7\}
 
 \subsection{Hay 3-Partition $\rightarrow$ hay PBN:}
 
-Supongamos que hay solucion en 3 partition, es decir, dado un conjunto $S$ en representacion unaria, pude
+Supongamos que hay solución en 3-Partition, es decir, dado un conjunto $S$ en representación unaria, pudimos
 encontrar $S_1$, $S_2$, $S_3$ subconjuntos disjuntos de $S$ tal que $sum(S1)$ = $sum(S2)$ = $sum(S3)$ = $m$.
 
-Resulta: 
+Resulta entonces: 
 
 \begin{itemize}
-    \item que los elementos de cada subconjunto $S_i$ van a estar en una fila de la matriz en la solucion de mi problema de la batalla naval (representando cada elemento a un barco)
-    \item cada elemento de $S_i$ van a ser barcos cuya longitud es igual al valor de dicho elemento.
-    \item las filas van a ser 5 ya que para respetar las restricciones sobre la adyacencia, que lo barcos no pueden estar de forma conjunta ni vertical ni horizontalmente, hay que colocar una fila de mas vacía entre medio de 2 filas que representan los subconjuntos. Osea al tener 3 subconjuntos, hay que pone  2 filas vacia entre medio para que sea una configuración válida.
-    \item las columnas van a ser $sum(S)$, y van a tener todas restriccion 1, para asegurarnos de que en una misma columna solo se va a colocar una parte de un barco
+    \item Los elementos de cada subconjunto $S_i$ van a estar en una fila de la matriz en la solución de nuestro problema de la batalla naval.
+    \item Los barcos van a ser representados por los elementos de $S_i$, tal que su longitud van a ser igual al valor de dicho elemento.
+    \item La cantidad de filas van a ser 5. Para respetar las restricciones sobre la adyacencia, hay que colocar una fila vacía tras colocar cada una de las filas que representan los subconjuntos, salvo la última. Luego la demanda de las filas que representan los subconjuntos va a ser igual a $m$, y las filas vacías van a tener de demanda 0.
+    \item La cantidad de columnas van a ser $sum(S)$, y van a tener todas restricción 1, para asegurarnos de que en una misma columna solo se va a colocar una parte de un barco.
 \end{itemize}
+Como pudimos encontrar 3 subconjuntos del conjunto $S$ que cumplen con las características del problema 3-Partition, resulta que, siempre vamos a poder encontrar una configuración válida para la batalla naval, en la cual cada subconjunto $S_i$ representa una fila y $sum(S)$ representa la cantidad de columnas. Además, la demanda cumplida en cada fila con demanda mayor a 0 es igual a $m$, y la demanda cumplida en cada columna es igual a 1.
     
 \subsection{Hay PBN $\rightarrow$ hay 3-Partition:}
 
-Supongamos que hay solución en la batalla naval, es decir, pude colocar los barcos de forma tal que se cumplan las restricciones de demandas de filas y columnas, y de forma tal que no sean adyacentes entre si.
-Entonces, tendremos una configuración en donde la tabla se compone de 5 filas, las cuales 3 tienen demanda mayor a 0 y 2 con demanda igual a 0, y columnas con demanda igual 1.
-Al colocar los barcos en dichas filas, resulta que estas se mapean a un subconjunto del problema de 3-Partition: Al tener 3 filas con demanda, tenemos 3 subconjuntos, y resulta 
-que la suma de la demanda cumplida son iguales en todos ellos. Entonces, como pude encontrar una disposicion de barcos que cumplan con la demanda pedida, resulta que hay solución 
-en 3 Partition tal que cada fila no vacía va a ser un subconjunto, y los barcos colocados, van a ser los elementos que pertenecen al subconjunto. Encontrando así 
-una solución al problema de 3-Partition.
+\begin{itemize}
+    \item Tendremos una configuración en donde la tabla se compone de 5 filas, las cuales 3 tienen demanda mayor a 0 y 2 con demanda igual a 0, y $sum(S)$ columnas con demanda igual 1.
+    \item Al colocar los barcos en dichas filas, resulta que estas se mapean a un subconjunto del problema de 3-Partition: Al tener 3 filas con demanda mayor a 0, tendremos 3 subconjuntos.
+    \item La demanda cumplida es igual en todas las filas cuya demanda es mayor a 0.
+\end{itemize}
+Como pudimos encontrar una disposición de barcos que cumplan con la demanda pedida, resulta que hay solución en 3-Partition tal que cada fila no vacía va a ser un subconjunto, y los barcos colocados en dicha fila, van a ser los elementos que pertenecen al subconjunto en cuestión.
 
 \subsection*{Conclusión}
 

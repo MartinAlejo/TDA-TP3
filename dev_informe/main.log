@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.14)  16 DEC 2024 22:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.14)  16 DEC 2024 23:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1242,7 +1242,7 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 [7]
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
-Package pdftex.def Info: logo.pdf  used on input line 182.
+Package pdftex.def Info: logo.pdf  used on input line 177.
 (pdftex.def)             Requested size: 71.13188pt x 25.89293pt.
 
 
@@ -1254,40 +1254,28 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 
 [8]
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 198.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 203.
 
 
-Overfull \hbox (60.7091pt too wide) detected at line 206
+Overfull \hbox (60.7091pt too wide) detected at line 211
 []
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 215.
+(hyperref)                removing `math shift' on input line 225.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\rightarrow' on input line 215.
+(hyperref)                removing `\rightarrow' on input line 225.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 215.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 229.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\rightarrow' on input line 229.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 229.
+(hyperref)                removing `math shift' on input line 225.
 
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
-Package pdftex.def Info: logo.pdf  used on input line 237.
+Package pdftex.def Info: logo.pdf  used on input line 236.
 (pdftex.def)             Requested size: 71.13188pt x 25.89293pt.
 
 Package fancyhdr Warning: \headheight is too small (27.0pt): 
@@ -1296,10 +1284,23 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[9]) (./tex/complejidad.tex (./code/backtracking.py
+[9]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 240.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\rightarrow' on input line 240.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 240.
+
+) (./tex/complejidad.tex (./code/backtracking.py
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
-Package pdftex.def Info: logo.pdf  used on input line 34.
+Package pdftex.def Info: logo.pdf  used on input line 11.
 (pdftex.def)             Requested size: 71.13188pt x 25.89293pt.
 
 
@@ -1312,7 +1313,7 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 [10]
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
-Package pdftex.def Info: logo.pdf  used on input line 98.
+Package pdftex.def Info: logo.pdf  used on input line 73.
 (pdftex.def)             Requested size: 71.13188pt x 25.89293pt.
 
 
@@ -1325,7 +1326,7 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 [11]
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
-Package pdftex.def Info: logo.pdf  used on input line 164.
+Package pdftex.def Info: logo.pdf  used on input line 139.
 (pdftex.def)             Requested size: 71.13188pt x 25.89293pt.
 
 
@@ -1335,10 +1336,10 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[12])) (./tex/ejemplosDeSolucion.tex (./code/ejemplos.txt
+[12])
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
-Package pdftex.def Info: logo.pdf  used on input line 18.
+Package pdftex.def Info: logo.pdf  used on input line 17.
 (pdftex.def)             Requested size: 71.13188pt x 25.89293pt.
 
 
@@ -1348,10 +1349,10 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[13]
+[13]) (./tex/ejemplosDeSolucion.tex (./code/ejemplos.txt
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
-Package pdftex.def Info: logo.pdf  used on input line 88.
+Package pdftex.def Info: logo.pdf  used on input line 63.
 (pdftex.def)             Requested size: 71.13188pt x 25.89293pt.
 
 
@@ -1364,7 +1365,7 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 [14]
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
-Package pdftex.def Info: logo.pdf  used on input line 156.
+Package pdftex.def Info: logo.pdf  used on input line 133.
 (pdftex.def)             Requested size: 71.13188pt x 25.89293pt.
 
 
@@ -1374,10 +1375,10 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[15])) (./tex/aproximacion.tex (./code/aproximacion.py
+[15]
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
-Package pdftex.def Info: logo.pdf  used on input line 3.
+Package pdftex.def Info: logo.pdf  used on input line 199.
 (pdftex.def)             Requested size: 71.13188pt x 25.89293pt.
 
 
@@ -1387,10 +1388,10 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[16]
+[16])) (./tex/aproximacion.tex (./code/aproximacion.py
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
-Package pdftex.def Info: logo.pdf  used on input line 70.
+Package pdftex.def Info: logo.pdf  used on input line 46.
 (pdftex.def)             Requested size: 71.13188pt x 25.89293pt.
 
 
@@ -1400,12 +1401,14 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[17])) (./tex/medicionEmpirica.tex
+[17])
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
-Package pdftex.def Info: logo.pdf  used on input line 4.
+Package pdftex.def Info: logo.pdf  used on input line 37.
 (pdftex.def)             Requested size: 71.13188pt x 25.89293pt.
-
 
 Package fancyhdr Warning: \headheight is too small (27.0pt): 
 (fancyhdr)                Make it at least 29.49297pt, for example:
@@ -1413,17 +1416,13 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[18pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.4 
-    ]
-<images/cuadradosMinimos.png, id=765, 511.9125pt x 415.5525pt>
+[18]) (./tex/medicionEmpirica.tex
+<images/cuadradosMinimos.png, id=764, 511.9125pt x 415.5525pt>
 File: images/cuadradosMinimos.png Graphic file (type png)
 <use images/cuadradosMinimos.png>
 Package pdftex.def Info: images/cuadradosMinimos.png  used on input line 8.
 (pdftex.def)             Requested size: 307.14987pt x 249.33342pt.
-<images/image.png, id=768, 511.9125pt x 415.5525pt>
+<images/image.png, id=767, 511.9125pt x 415.5525pt>
 File: images/image.png Graphic file (type png)
 <use images/image.png>
 Package pdftex.def Info: images/image.png  used on input line 17.
@@ -1440,7 +1439,11 @@ Package fancyhdr Warning: \headheight is too small (27.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49297pt}.
 
-[19 <./images/cuadradosMinimos.png>]) (./tex/conclusiones.tex)
+[19pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.18 \end{center}
+                  <./images/cuadradosMinimos.png>]) (./tex/conclusiones.tex)
 File: logo.pdf Graphic file (type pdf)
 <use logo.pdf>
 Package pdftex.def Info: logo.pdf  used on input line 97.
@@ -1469,13 +1472,13 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 Here is how much of TeX's memory you used:
  37037 strings out of 478287
  691020 string characters out of 5849289
- 3193699 words of memory out of 5000000
+ 3245699 words of memory out of 5000000
  53995 multiletter control sequences out of 15000+600000
  479949 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  103i,16n,105p,770b,2128s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on main.pdf (20 pages, 318661 bytes).
+Output written on main.pdf (20 pages, 319447 bytes).
 PDF statistics:
  961 PDF objects out of 1000 (max. 8388607)
  896 compressed objects within 9 object streams

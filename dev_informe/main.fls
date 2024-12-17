@@ -1562,6 +1562,9 @@ INPUT ./logo.pdf
 INPUT ./logo.pdf
 INPUT logo.pdf
 INPUT ./logo.pdf
+INPUT ./logo.pdf
+INPUT logo.pdf
+INPUT ./logo.pdf
 INPUT ./tex/ejemplosDeSolucion.tex
 INPUT ./tex/ejemplosDeSolucion.tex
 INPUT ./tex/ejemplosDeSolucion.tex
@@ -1610,9 +1613,6 @@ INPUT tex/medicionEmpirica.tex
 INPUT ./tex/medicionEmpirica.tex
 INPUT ./tex/medicionEmpirica.tex
 INPUT tex/medicionEmpirica.tex
-INPUT ./logo.pdf
-INPUT logo.pdf
-INPUT ./logo.pdf
 INPUT ./images/cuadradosMinimos.png
 INPUT ./images/cuadradosMinimos.png
 INPUT images/cuadradosMinimos.png
